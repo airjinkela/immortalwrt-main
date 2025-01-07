@@ -1,0 +1,31 @@
+From 55ba34eadd4ff8cc20a0c02ac89fb3e4086dc89f Mon Sep 17 00:00:00 2001
+From: W_Y_CPP <383152993@qq.com>
+Date: Tue, 11 Jun 2024 01:21:22 -0400
+Subject: [PATCH] export sched symbol
+
+---
+ kernel/sched/core.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/kernel/sched/core.c b/kernel/sched/core.c
+index e49e41c..d10e4b3 100644
+--- a/kernel/sched/core.c
++++ b/kernel/sched/core.c
+@@ -7885,12 +7885,12 @@ int sched_setscheduler(struct task_struct *p, int policy,
+ {
+ 	return _sched_setscheduler(p, policy, param, true);
+ }
+-
++EXPORT_SYMBOL_GPL(sched_setscheduler);
+ int sched_setattr(struct task_struct *p, const struct sched_attr *attr)
+ {
+ 	return __sched_setscheduler(p, attr, true, true);
+ }
+-
++EXPORT_SYMBOL_GPL(sched_setattr);
+ int sched_setattr_nocheck(struct task_struct *p, const struct sched_attr *attr)
+ {
+ 	return __sched_setscheduler(p, attr, false, true);
+-- 
+2.17.1
+

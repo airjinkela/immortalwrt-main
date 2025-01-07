@@ -1,0 +1,18 @@
+[submodule "package/lucky"]
+	path = package/lucky
+	url = https://github.com/sirpdboy/luci-app-lucky.git
+[submodule "package/helloworld"]
+	path = package/helloworld
+	url = https://github.com/fw876/helloworld.git
+[submodule "package/LingTiGameAcc"]
+	path = package/LingTiGameAcc
+	url = https://gitee.com/airjinkela/ling-ti-game-acc.git
+[submodule "package/luci-app-easymesh"]
+	path = package/luci-app-easymesh
+	url = https://gitee.com/airjinkela/luci-app-easymesh.git
+[submodule "package/5G-Modem-Support"]
+	path = package/5G-Modem-Support
+	url = https://gitee.com/airjinkela/5G-Modem-Support.git
+[submodule "package/small"]
+	path = package/small
+	url = https://gitee.com/airjinkela/small.git
