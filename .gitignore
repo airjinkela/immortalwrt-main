@@ -19,7 +19,7 @@
 /package/openwrt-packages
 /*.patch
 /llvm-bpf*
-/vermagic
+/vermagic*
 key-build*
 private-key.pem
 public-key.pem
