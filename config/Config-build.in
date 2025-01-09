@@ -16,6 +16,11 @@ config EXPERIMENTAL
 
 	  If you plan to use this build in production, say NO!
 
+config CUSTOMIZE_THE_VERSION_NUMBER
+	bool "Customize the version number"
+	help
+	  Customize the version number
+
 menu "Global build settings"
 
 	config JSON_OVERVIEW_IMAGE_INFO

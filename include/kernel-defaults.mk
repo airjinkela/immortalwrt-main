@@ -127,12 +127,17 @@ define Kernel/Configure/Default
 		cp $(LINUX_DIR)/.config.set $(LINUX_DIR)/.config.prev; \
 	}
 	$(_SINGLE) [ -d $(LINUX_DIR)/user_headers ] || $(KERNEL_MAKE) $(if $(findstring uml,$(BOARD)),ARCH=$(ARCH)) INSTALL_HDR_PATH=$(LINUX_DIR)/user_headers headers_install
-	$(if $(wildcard $(TOPDIR)/vermagic), \
-		$(info vermagic File Exist), \
-		$(info vermagic File Not Exist) \
-		grep '=[ym]' $(LINUX_DIR)/.config.set | LC_ALL=C sort | $(MKHASH) md5 > $(TOPDIR)/vermagic \
+	$(if $(CONFIG_CUSTOMIZE_THE_VERSION_NUMBER), \
+		$(info Use Custom Kernel Version)
+		$(if $(wildcard $(TOPDIR)/vermagic), \
+			$(info vermagic File Exist), \
+			$(info vermagic File Not Exist) \
+			grep '=[ym]' $(LINUX_DIR)/.config.set | LC_ALL=C sort | $(MKHASH) md5 > $(TOPDIR)/vermagic \
+		)\
+		$(CP) $(TOPDIR)/vermagic $(LINUX_DIR)/.vermagic;,\
+		$(info Use General Kernel Version)
+		grep '=[ym]' $(LINUX_DIR)/.config.set | LC_ALL=C sort | $(MKHASH) md5 > $(LINUX_DIR)/.vermagic\
 	)
-	cp $(TOPDIR)/vermagic $(LINUX_DIR)/.vermagic
 endef
 
 define Kernel/Configure/Initramfs
