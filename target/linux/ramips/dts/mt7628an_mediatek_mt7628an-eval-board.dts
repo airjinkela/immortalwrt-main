@@ -15,36 +15,36 @@
 		lan4 {
 			label = "green:lan4";
 			function = LED_FUNCTION_LAN;
-			gpios = <&gpio 9 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio 39 GPIO_ACTIVE_HIGH>;
 		};
 
 		lan3 {
 			label = "green:lan3";
 			function = LED_FUNCTION_LAN;
-			gpios = <&gpio 10 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio 40 GPIO_ACTIVE_HIGH>;
 		};
 
 		lan2 {
 			label = "green:lan2";
 			function = LED_FUNCTION_LAN;
-			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio 41 GPIO_ACTIVE_HIGH>;
 		};
 
 		lan1 {
 			label = "green:lan1";
 			function = LED_FUNCTION_LAN;
-			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio 42 GPIO_ACTIVE_HIGH>;
 		};
 
 		wan {
 			label = "green:wan";
 			function = LED_FUNCTION_WAN;
-			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio 43 GPIO_ACTIVE_HIGH>;
 		};
 
 		wlan {
 			function = LED_FUNCTION_WLAN;
-			gpios = <&gpio 33 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio 44 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "phy0tpt";
 		};
 	};
@@ -52,7 +52,7 @@
 
 &state_default {
 	gpio {
-		groups = "i2c";
+		groups = "gpio", "p0led_an", "p1led_an", "p2led_an", "p3led_an", "p4led_an", "i2c", "refclk", "uart1", "wdt", "wled_an";
 		function = "gpio";
 	};
 };

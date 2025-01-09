@@ -46,6 +46,7 @@ ramips_setup_interfaces()
 	hilink,hlk-7688a|\
 	hiwifi,hc5861b|\
 	kroks,kndrt31r16|\
+	MediaTek,mt7628an-eval-board|\
 	skylab,skw92a|\
 	tplink,archer-c20-v4|\
 	tplink,archer-c20-v5|\
