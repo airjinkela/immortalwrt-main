@@ -64,12 +64,12 @@ keenetic,kn-1613)
 mediatek,linkit-smart-7688)
 	ucidef_set_led_wlan "wifi" "wifi" "orange:wifi" "phy0tpt"
 	;;
-MediaTek,mt7628an-eval-board)
-	ucidef_set_led_netdev "lan1" "lan1" "green:lan1" "eth0.2" 
-	ucidef_set_led_netdev "lan2" "lan2" "green:lan2" "eth0.3" 
-	ucidef_set_led_netdev "lan3" "lan3" "green:lan3" "eth0.4" 
-	ucidef_set_led_netdev "lan4" "lan4" "green:lan4" "eth0.5" 
-	ucidef_set_led_netdev "wan" "wan" "green:wan" "eth0.1" 
+mediatek,mt7628an-eval-board)
+	ucidef_set_led_netdev "lan1" "lan1" "green:lan1" "eth0.1" 
+	ucidef_set_led_netdev "lan2" "lan2" "green:lan2" "eth0.2" 
+	ucidef_set_led_netdev "lan3" "lan3" "green:lan3" "eth0.3" 
+	ucidef_set_led_netdev "lan4" "lan4" "green:lan4" "eth0.4" 
+	ucidef_set_led_netdev "wan" "wan" "green:wan" "eth0.5" 
 	;;
 oraybox,x1)
 	ucidef_set_led_netdev "wifi" "wifi" "blue:status" "wlan0"
