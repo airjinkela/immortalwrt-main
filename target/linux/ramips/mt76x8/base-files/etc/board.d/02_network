@@ -71,13 +71,19 @@ ramips_setup_interfaces()
 	asus,rt-n11p-b1|\
 	asus,rt-n12-vp-b1|\
 	hiwifi,hc5661a|\
-	mediatek,mt7628an-eval-board|\
 	mercury,mac1200r-v2|\
 	totolink,lr1200|\
 	wavlink,wl-wn570ha1|\
 	wavlink,wl-wn575a3)
 		ucidef_add_switch "switch0" \
 			"0:lan" "1:lan" "2:lan" "3:lan" "4:wan" "6@eth0"
+		;;
+	mediatek,mt7628an-eval-board)
+		ucidef_add_switch "switch0" \
+			"1:eth1" "2:eth2" "3:eth3" "4:eth4" "5:wan" "6@eth0"
+		ucidef_set_interface_lan "eth0.1 eth0.2 eth0.3 eth0.4"
+		ucidef_set_interface_wan "eth0.5"
+
 		;;
 	buffalo,wcr-1166ds|\
 	elecom,wrc-1167fs|\
