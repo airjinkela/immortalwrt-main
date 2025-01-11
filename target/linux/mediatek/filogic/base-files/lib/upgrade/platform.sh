@@ -71,7 +71,8 @@ platform_do_upgrade() {
 	bananapi,bpi-r4-poe|\
 	cetron,ct3003-ubootmod|\
 	cmcc,a10|\
-	cmcc,rax3000m|\
+	cmcc,xr30*|\
+	cmcc,rax3000m*|\
 	gatonetworks,gdsp|\
 	h3c,magic-nx30-pro|\
 	imou,lc-hx3001|\
@@ -186,7 +187,8 @@ platform_check_image() {
 	bananapi,bpi-r3-mini|\
 	bananapi,bpi-r4|\
 	bananapi,bpi-r4-poe|\
-	cmcc,rax3000m)
+	cmcc,xr30*|\
+	cmcc,rax3000m*)
 		[ "$magic" != "d00dfeed" ] && {
 			echo "Invalid image type."
 			return 1
@@ -227,7 +229,8 @@ platform_copy_config() {
 	bananapi,bpi-r3-mini|\
 	bananapi,bpi-r4|\
 	bananapi,bpi-r4-poe|\
-	cmcc,rax3000m)
+	cmcc,xr30*|\
+	cmcc,rax3000m*)
 		if [ "$CI_METHOD" = "emmc" ]; then
 			emmc_copy_config
 		fi
