@@ -9,3 +9,5 @@ src-git istore_packages https://github.com/linkease/istore-packages;main
 src-git nas https://github.com/linkease/nas-packages.git;master
 src-git nas_luci https://github.com/linkease/nas-packages-luci.git;main
 
+
+src-git modem https://github.com/FUjr/modem_feeds.git;main
