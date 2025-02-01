@@ -64,6 +64,11 @@ platform_do_upgrade() {
 	local board=$(board_name)
 
 	case "$board" in
+	cmcc,rax3000m-emmc)
+		CI_KERNPART="kernel"
+		CI_ROOTPART="rootfs"
+		emmc_do_upgrade "$1"
+		;;
 	abt,asr3000|\
 	bananapi,bpi-r3|\
 	bananapi,bpi-r3-mini|\
@@ -72,7 +77,7 @@ platform_do_upgrade() {
 	cetron,ct3003-ubootmod|\
 	cmcc,a10|\
 	cmcc,xr30*|\
-	cmcc,rax3000m*|\
+	cmcc,rax3000m-nand|\
 	gatonetworks,gdsp|\
 	h3c,magic-nx30-pro|\
 	imou,lc-hx3001|\
@@ -190,8 +195,10 @@ platform_check_image() {
 	cmcc,xr30*|\
 	cmcc,rax3000m*)
 		[ "$magic" != "d00dfeed" ] && {
-			echo "Invalid image type."
-			return 1
+			[ "$magic" != "73797375" ] && {
+				echo "Invalid image type."
+				return 1
+			}
 		}
 		return 0
 		;;
@@ -210,6 +217,7 @@ platform_copy_config() {
 	acer,predator-w6d|\
 	acer,vero-w6m|\
 	arcadyan,mozart|\
+	cmcc,rax3000m-emmc|\
 	glinet,gl-mt2500|\
 	glinet,gl-mt6000|\
 	glinet,gl-x3000|\
