@@ -137,7 +137,6 @@ define Kernel/Configure/Default
 		$(CP) $(TOPDIR)/vermagic $(LINUX_DIR)/.vermagic;,\
 		$(info Use General Kernel Version)
 		grep '=[ym]' $(LINUX_DIR)/.config.set | LC_ALL=C sort | $(MKHASH) md5 > $(LINUX_DIR)/.vermagic\
-		cat $(LINUX_DIR)/.vermagic\
 	)
 endef
 
