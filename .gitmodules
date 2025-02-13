@@ -3,7 +3,7 @@
 	url = https://github.com/sirpdboy/luci-app-lucky.git
 [submodule "package/helloworld"]
 	path = package/helloworld
-	url = https://github.com/fw876/helloworld.git
+	url = https://gitee.com/airjinkela/helloword-package.git
 [submodule "package/LingTiGameAcc"]
 	path = package/LingTiGameAcc
 	url = https://gitee.com/airjinkela/ling-ti-game-acc.git
