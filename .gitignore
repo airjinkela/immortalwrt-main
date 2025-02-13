@@ -16,6 +16,7 @@
 /target/linux/feeds
 /overlay
 /package/feeds
+/package/prepare-files
 /package/openwrt-packages
 /*.patch
 /llvm-bpf*
