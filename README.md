@@ -14,6 +14,7 @@
 |Netgear R6300 V2   | netgear_r6300-v2                    |bmc53xx      |支持并正常运行        |
 |FriendlyARM NanoPi R5C| friendlyarm_nanopi-r5c           |rk3568       |支持并正常运行        |
 |CMCC xr30 (NAND version)| cmcc_xr30-nand                 |mt7981b      |支持并正常运行        |
+|Zbtlink ZBT-Z8102AX-V2| zbtlink_zbt-z8102ax-v2           |mt7981b      |支持并正常运行        |
 |MobiPromo CM520-79F| mobipromo_cm520-79f                 |qcom-ipq4019 |无法启动?             |
 
 ## 编译常见变量名
