@@ -5,7 +5,7 @@
 
 / {
 	compatible = "nradio,c2000", "ralink,mt7620a-soc";
-	model = "NRadio C2000-410";
+	model = "NRadio C2000";
 
 	chosen {
 		bootargs = "console=ttyS0,115200";
