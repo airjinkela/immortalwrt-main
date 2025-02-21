@@ -4,8 +4,8 @@
 #include <dt-bindings/input/input.h>
 
 / {
-	compatible = "nradio,c2000", "ralink,mt7620a-soc";
-	model = "NRadio C2000";
+	compatible = "nradio,c2000-410", "ralink,mt7620a-soc";
+	model = "NRadio C2000-410";
 
 	chosen {
 		bootargs = "console=ttyS0,115200";
@@ -153,6 +153,10 @@
 			};
 		};
 	};
+};
+
+&pcie {
+	status = "okay";
 };
 
 &pcie0 {
