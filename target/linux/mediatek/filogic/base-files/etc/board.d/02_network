@@ -62,7 +62,9 @@ mediatek_setup_interfaces()
 	netcore,n60|\
 	netcore,n60-pro|\
 	netcore,n60-pro-mod|\
-	ruijie,rg-x60-pro|\
+	ruijie,rg-x60-pro|\	
+	nradio,c8-660|\
+	nradio,c8-668gl|\
 	ruijie,rg-x60-pro-mod|\
 	unielec,u7981-01*|\
 	zbtlink,zbt-z8102ax|\
@@ -212,6 +214,16 @@ mediatek_setup_macs()
 		;;
 	netgear,wax220)
 		lan_mac=$(mtd_get_mac_ascii u-boot-env mac)
+		label_mac=$lan_mac
+		;;
+	nradio,c8-668gl)
+		lan_mac=$(mmc_get_mac_ascii bdinfo "fac_mac ")
+		wan_mac=$(macaddr_add "$lan_mac" 2)
+		label_mac=$lan_mac
+		;;
+	nradio,c8-660)
+		lan_mac=$(mtd_get_mac_ascii bdinfo "fac_mac ")
+		wan_mac=$(macaddr_add "$lan_mac" 2)
 		label_mac=$lan_mac
 		;;
 	qihoo,360t7)
