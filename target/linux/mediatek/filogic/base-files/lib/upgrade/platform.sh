@@ -80,6 +80,8 @@ platform_do_upgrade() {
 	cmcc,a10|\
 	cmcc,xr30*|\
 	cmcc,rax3000m-nand|\
+	cmcc,rax3000m|\
+	cudy,tr3000-v1-ubootmod|\
 	gatonetworks,gdsp|\
 	h3c,magic-nx30-pro|\
 	imou,lc-hx3001|\
