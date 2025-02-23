@@ -84,6 +84,9 @@ BUILD_DIR:=$(BUILD_DIR_BASE)/$(TARGET_DIR_NAME)
 * lucky https://github.com/sirpdboy/luci-app-lucky
 * Qmodem https://github.com/FUjr/modem_feeds
 *
+* x-wrt https://github.com/x-wrt/x-wrt
+* lede https://github.com/coolsnowwolf/lede
+*
 * target/linux/msm89xx https://github.com/lkiuyu/immortalwrt/
 
 ## 原项目README
