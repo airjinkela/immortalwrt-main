@@ -2051,3 +2051,20 @@ define Device/zbtlink_zbt-z8102ax-v2
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += zbtlink_zbt-z8102ax-v2
+
+define Device/h3c_magic-nx30-pro-nmbm-112m
+  DEVICE_VENDOR := H3C
+  DEVICE_MODEL := NX30PRO (with 112M ubi)
+  DEVICE_DTS := mt7981b-h3c-magic-nx30-pro-nmbm-112m
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  IMAGE_SIZE := 110592k
+  KERNEL_IN_UBI := 1
+  IMAGES += factory.bin
+  IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += h3c_magic-nx30-pro-nmbm-112m
