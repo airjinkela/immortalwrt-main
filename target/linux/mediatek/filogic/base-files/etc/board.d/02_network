@@ -38,6 +38,7 @@ mediatek_setup_interfaces()
 	cmcc,a10|\
 	confiabits,mt7981|\
 	cudy,wr3000-v1|\
+	sl,3000-emmc|\
 	jcg,q30-pro|\
 	livinet,zr-3020|\
 	livinet,zr-3020-ubootmod|\
@@ -199,6 +200,17 @@ mediatek_setup_macs()
 		label_mac=$(mtd_get_mac_ascii product_info ethaddr)
 		wan_mac=$label_mac
 		lan_mac=$(macaddr_add "$label_mac" 1)
+		;;
+	sl,3000-emmc)
+		lan_mac=$(mmc_get_mac_binary factory 0x04)
+		wan_mac=$(macaddr_add $lan_mac -2)
+		label_mac=$wan_mac
+		local wifi_mac="$(macaddr_add $lan_mac 1)"
+		sed -i '/MacAddress=$wifi_mac/d' /etc/wireless/mediatek/mt7981.dbdc.b0.dat
+		echo "MacAddress=$wifi_mac" >> /etc/wireless/mediatek/mt7981.dbdc.b0.dat
+		wifi_mac="$(macaddr_add $lan_mac 2)"
+		sed -i '/MacAddress=$wifi_mac/d' /etc/wireless/mediatek/mt7981.dbdc.b1.dat
+		echo "MacAddress=$wifi_mac" >> /etc/wireless/mediatek/mt7981.dbdc.b1.dat
 		;;
 	xiaomi,mi-router-ax3000t|\
 	xiaomi,mi-router-ax3000t-ubootmod|\
