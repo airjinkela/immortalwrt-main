@@ -16,11 +16,18 @@ config EXPERIMENTAL
 
 	  If you plan to use this build in production, say NO!
 
-config CUSTOMIZE_THE_VERSION_NUMBER
-	bool "Customize the version number"
+config CUSTOMIZE_THE_VERSION_MAGIC
+	bool "Customize the version magic"
 	default y
 	help
-	  Customize the version number
+	  Customize the version magic
+
+config USE_SOFTWARE_SOURCE_KERNEL_MAGIC
+	bool "Use the software source kernel magic"
+	depends on CUSTOMIZE_THE_VERSION_MAGIC
+	default y
+	help
+	  Set version magic same with software source
 
 menu "Global build settings"
 

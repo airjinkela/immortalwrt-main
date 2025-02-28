@@ -18,6 +18,7 @@
 /package/feeds
 /package/prepare-files
 /package/openwrt-packages
+/kernel_version_list.json
 /*.patch
 /llvm-bpf*
 /vermagic*

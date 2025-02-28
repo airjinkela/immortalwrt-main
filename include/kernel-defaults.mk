@@ -7,6 +7,26 @@ ifdef CONFIG_STRIP_KERNEL_EXPORTS
 	EXTRA_LDSFLAGS="-I$(KERNEL_BUILD_DIR) -include symtab.h"
 endif
 
+ifdef CONFIG_USE_SOFTWARE_SOURCE_KERNEL_MAGIC
+define GenVerMagicFile
+	$(if $(HAVE_RUNNED_MY_FUNCTION),, \
+		$(info "Set version magic same with software source") \
+		$(STAGING_DIR_HOST)/bin/python3 \
+			$(SCRIPT_DIR)/get_kernel_version_magic.py \
+			$(TOPDIR)/kernel_version_list.json \
+			$(TOPDIR)/vermagic \
+			$(BOARD) \
+			$(SUBTARGET) \
+			$(LINUX_VERSION);)
+	$(eval HAVE_RUNNED_MY_FUNCTION := 1)
+endef
+else
+define GenVerMagicFile
+	$(info "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+endef
+endif
+
+
 INITRAMFS_EXTRA_FILES ?= $(GENERIC_PLATFORM_DIR)/image/initramfs-base-files.txt
 
 export HOST_EXTRACFLAGS=-I$(STAGING_DIR_HOST)/include
@@ -127,17 +147,18 @@ define Kernel/Configure/Default
 		cp $(LINUX_DIR)/.config.set $(LINUX_DIR)/.config.prev; \
 	}
 	$(_SINGLE) [ -d $(LINUX_DIR)/user_headers ] || $(KERNEL_MAKE) $(if $(findstring uml,$(BOARD)),ARCH=$(ARCH)) INSTALL_HDR_PATH=$(LINUX_DIR)/user_headers headers_install
-	$(if $(CONFIG_CUSTOMIZE_THE_VERSION_NUMBER), \
-		$(info Use Custom Kernel Version Magic)
+	$(if $(CONFIG_CUSTOMIZE_THE_VERSION_MAGIC), \
+		$(info Use Custom Kernel Version Magic) \
+		$(call GenVerMagicFile)\
 		$(if $(wildcard $(TOPDIR)/vermagic), \
 			$(info vermagic File Exist), \
-			$(info vermagic File Not Exist) \
-			grep '=[ym]' $(LINUX_DIR)/.config.set | LC_ALL=C sort | $(MKHASH) md5 > $(TOPDIR)/vermagic \
-		)\
+			$(if $(CONFIG_USE_SOFTWARE_SOURCE_KERNEL_MAGIC),, \
+				$(info vermagic File Not Exist) \
+				grep '=[ym]' $(LINUX_DIR)/.config.set | LC_ALL=C sort | $(MKHASH) md5 > $(TOPDIR)/vermagic )
+			)
 		$(CP) $(TOPDIR)/vermagic $(LINUX_DIR)/.vermagic;,\
-		$(info Use General Kernel Version Magic)
-		grep '=[ym]' $(LINUX_DIR)/.config.set | LC_ALL=C sort | $(MKHASH) md5 > $(LINUX_DIR)/.vermagic\
-	)
+		$(info Use General Kernel Version Magic);\
+		grep '=[ym]' $(LINUX_DIR)/.config.set | LC_ALL=C sort | $(MKHASH) md5 > $(LINUX_DIR)/.vermagic)
 endef
 
 define Kernel/Configure/Initramfs
