@@ -20,7 +20,6 @@
 	};
 
 	chosen {
-		bootargs-append = " root=/dev/ubiblock0_1 rootwait";
 		stdout-path = "serial0:115200n8";
 	};
 
