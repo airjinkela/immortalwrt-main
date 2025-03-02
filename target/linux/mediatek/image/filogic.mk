@@ -2003,11 +2003,11 @@ define Device/zyxel_nwa50ax-pro
 endef
 TARGET_DEVICES += zyxel_nwa50ax-pro
 
-define Device/cudy_tr3000-mod
+define Device/cudy_tr3000-v1-mod
   DEVICE_VENDOR := Cudy
   DEVICE_MODEL := TR3000
-  DEVICE_VARIANT := (U-Boot mod)
-  DEVICE_DTS := mt7981b-cudy-tr3000-mod
+  DEVICE_VARIANT := v1 (U-Boot mod)
+  DEVICE_DTS := mt7981b-cudy-tr3000-v1-mod
   DEVICE_DTS_DIR := ../dts
   UBINIZE_OPTS := -E 5
   BLOCKSIZE := 128k
@@ -2016,7 +2016,7 @@ define Device/cudy_tr3000-mod
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
   DEVICE_PACKAGES :=  kmod-mt7915e kmod-usb3 kmod-mt7981-firmware mt7981-wo-firmware
 endef
-TARGET_DEVICES += cudy_tr3000-mod
+TARGET_DEVICES += cudy_tr3000-v1-mod
 
 
 define Device/cmcc_rax3000m-emmc

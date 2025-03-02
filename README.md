@@ -9,7 +9,7 @@
 
 |    设备            |device                               |             | 情况               |
 | ------------------| ------------------------------------|-------------| -------------------|
-|cudy tr3000        | cudy_tr3000-mod \| cudy_tr3000-v1   |mt7981b      |支持并正常运行        |
+|cudy tr3000        | cudy_tr3000-v1-mod \| cudy_tr3000-v1   |mt7981b      |支持并正常运行        |
 |X86                | *                                   |             |支持并正常运行        |
 |Netgear R6300 V2   | netgear_r6300-v2                    |bmc53xx      |支持并正常运行        |
 |FriendlyARM NanoPi R5C| friendlyarm_nanopi-r5c           |rk3568       |支持并正常运行        |
