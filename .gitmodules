@@ -13,3 +13,6 @@
 [submodule "package/small"]
 	path = package/small
 	url = https://gitee.com/airjinkela/small.git
+[submodule "package/modem_feeds"]
+	path = package/modem_feeds
+	url = https://gitee.com/airjinkela/modem_feeds.git
