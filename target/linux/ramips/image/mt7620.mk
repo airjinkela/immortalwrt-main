@@ -1651,3 +1651,14 @@ define Device/zyxel_keenetic-viva
   SUPPORTED_DEVICES += kng_rc
 endef
 TARGET_DEVICES += zyxel_keenetic-viva
+
+define Device/nradio_c2000-410
+  SOC := mt7620a
+  IMAGE_SIZE := 15808k
+  DEVICE_VENDOR := NRadio
+  DEVICE_MODEL := C2000-410
+  DEVICE_PACKAGES := kmod-mt76x0e kmod-mt76x2 kmod-usb2 kmod-usb-ohci kmod-sdhci \
+	kmod-phy-realtek
+  SUPPORTED_DEVICES += c2000-410
+endef
+TARGET_DEVICES += nradio_c2000-410

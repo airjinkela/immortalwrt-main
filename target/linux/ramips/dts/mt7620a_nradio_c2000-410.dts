@@ -1,0 +1,226 @@
+#include "mt7620a.dtsi"
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/input/input.h>
+
+/ {
+	compatible = "nradio,c2000-410", "ralink,mt7620a-soc";
+	model = "NRadio C2000-410";
+
+	chosen {
+		bootargs = "console=ttyS0,115200";
+	};
+
+	keys {
+		compatible = "gpio-keys";
+
+		reset {
+			label = "reset";
+			gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_RESTART>;
+		};
+	};
+
+	aliases {
+		led-boot = &led_system;
+		led-failsafe = &led_system;
+		led-running = &led_system;
+		led-upgrade = &led_system;
+	};
+	
+	leds {
+		compatible = "gpio-leds";
+
+		led_system: system {
+			label = "blue:system";
+			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
+		};
+
+		internet {
+			label = "blue:internet";
+			gpios = <&gpio3 0 GPIO_ACTIVE_LOW>;
+		};
+
+		wlan2g {
+			label = "blue:wlan2g";
+			gpios = <&gpio0 11 GPIO_ACTIVE_LOW>;
+			linux,default-trigger = "phy1tpt";
+		};
+
+		wlan5g {
+			label = "blue:wlan5g";
+			gpios = <&gpio0 7 GPIO_ACTIVE_LOW>;
+			linux,default-trigger = "phy0tpt";
+		};
+
+		turbo {
+			label = "blue:turbo";
+			gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
+		};
+	};
+
+	gpio_export {
+	compatible = "gpio-export";
+	#size-cells = <0>;
+
+		usbpower {
+			gpio-export,name = "usbpower";
+			gpio-export,output = <0>;
+			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
+		};
+
+		sdpower {
+			gpio-export,name = "sdpower";
+			gpio-export,output = <0>;
+			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
+		};
+	};
+
+};
+
+&spi0 {
+	status = "okay";
+
+	flash@0 {
+		compatible = "jedec,spi-nor";
+		reg = <0>;
+		spi-max-frequency = <50000000>;
+		m25p,fast-read;
+
+		partitions {
+			compatible = "fixed-partitions";
+			#address-cells = <1>;
+			#size-cells = <1>;
+
+			partition@0 {
+				label = "u-boot";
+				reg = <0x0 0x30000>;
+				read-only;
+			};
+
+			partition@30000 {
+				label = "hw_panic";
+				reg = <0x30000 0x10000>;
+				read-only;
+			};
+
+			partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+
+				nvmem-layout {
+					compatible = "fixed-layout";
+					#address-cells = <1>;
+					#size-cells = <1>;
+
+					eeprom_factory_0: eeprom@0 {
+						reg = <0x0 0x200>;
+					};
+
+					eeprom_factory_8000: eeprom@8000 {
+						reg = <0x8000 0x200>;
+					};
+
+					macaddr_factory_4: macaddr@4 {
+						reg = <0x4 0x6>;
+					};
+				};
+			};
+
+			partition@50000 {
+				compatible = "denx,uimage";
+				label = "firmware";
+				reg = <0x50000 0xf70000>;
+			};
+
+			partition@fc0000 {
+				label = "oem";
+				reg = <0xfc0000 0x20000>;
+				read-only;
+			};
+
+			partition@fe0000 {
+				label = "bdinfo";
+				reg = <0xfe0000 0x10000>;
+				read-only;
+			};
+
+			partition@ff0000 {
+				label = "backup";
+				reg = <0xff0000 0x10000>;
+				read-only;
+			};
+		};
+	};
+};
+
+&pcie {
+	status = "okay";
+};
+
+&pcie0 {
+	wifi@0,0 {
+		compatible = "pci14c3,7662";
+		reg = <0x0000 0 0 0 0>;
+		nvmem-cells = <&eeprom_factory_8000>;
+		nvmem-cell-names = "eeprom";
+		ieee80211-freq-limit = <5000000 6000000>;
+	};
+};
+
+&wmac {
+	nvmem-cells = <&eeprom_factory_0>;
+	nvmem-cell-names = "eeprom";
+	pinctrl-names = "default", "pa_gpio";
+	pinctrl-0 = <&pa_pins>;
+	pinctrl-1 = <&pa_gpio_pins>;
+};
+
+&ethernet {
+	nvmem-cells = <&macaddr_factory_4>;
+	nvmem-cell-names = "mac-address";
+
+	pinctrl-names = "default";
+	pinctrl-0 = <&mdio_pins>, <&rgmii1_pins>;
+
+	mediatek,portmap = "llllw";
+
+	port@5 {
+		status = "okay";
+		phy-handle = <&phy5>;
+		phy-mode = "rgmii";
+	};
+
+	mdio-bus {
+		status = "okay";
+
+		phy5: ethernet-phy@5 {
+			reg = <5>;
+			phy-mode = "rgmii";
+		};
+	};
+};
+
+&state_default {
+	gpio {
+		groups = "uartf", "wled";
+		function = "gpio";
+	};
+};
+
+&sdhci {
+	status = "okay";
+};
+
+&gpio3 {
+	status = "okay";
+};
+
+&ehci {
+	status = "okay";
+};
+
+&ohci {
+	status = "okay";
+};
