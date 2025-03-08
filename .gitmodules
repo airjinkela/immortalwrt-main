@@ -10,9 +10,6 @@
 [submodule "package/luci-app-easymesh"]
 	path = package/luci-app-easymesh
 	url = https://gitee.com/airjinkela/luci-app-easymesh.git
-[submodule "package/5G-Modem-Support"]
-	path = package/5G-Modem-Support
-	url = https://gitee.com/airjinkela/5G-Modem-Support.git
 [submodule "package/small"]
 	path = package/small
 	url = https://gitee.com/airjinkela/small.git
