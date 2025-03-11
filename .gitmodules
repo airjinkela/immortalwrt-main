@@ -15,4 +15,4 @@
 	url = https://gitee.com/airjinkela/small.git
 [submodule "package/modem_feeds"]
 	path = package/modem_feeds
-	url = https://gitee.com/airjinkela/modem_feeds.git
+	url = https://github.com/FUjr/modem_feeds.git
