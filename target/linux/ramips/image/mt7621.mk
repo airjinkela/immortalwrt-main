@@ -1793,7 +1793,7 @@ define Device/jdcloud_re-sp-01b
   DEVICE_VENDOR := JDCloud
   DEVICE_MODEL := RE-SP-01B
   DEVICE_PACKAGES := kmod-mt7603 kmod-mt7615e kmod-mt7615-firmware \
-	kmod-mmc-mtk kmod-usb3 automount
+	kmod-sdhci-mt7620 kmod-usb3 automount
 endef
 TARGET_DEVICES += jdcloud_re-sp-01b
 
@@ -1976,6 +1976,8 @@ define Device/mercusys_mr70x-v1
   $(Device/tplink-safeloader)
   DEVICE_VENDOR := MERCUSYS
   DEVICE_MODEL := MR70X
+  DEVICE_ALT0_VENDOR := MERCUSYS
+  DEVICE_ALT0_MODEL := MR1800X
   DEVICE_VARIANT := v1
   DEVICE_PACKAGES := kmod-mt7915-firmware -uboot-envtools
   TPLINK_BOARD_ID := MR70X
