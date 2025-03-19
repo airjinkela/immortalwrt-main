@@ -1,0 +1,37 @@
+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+
+/dts-v1/;
+#include "mt7981b-cmcc-rax3000m.dts"
+
+/ {
+	model = "CMCC RAX3000Z";
+	compatible = "cmcc,rax3000z", "mediatek,mt7981";
+
+	aliases {
+		led-boot = &red_led;
+		led-failsafe = &red_led;
+		led-running = &white_led;
+		led-upgrade = &red_led;
+		serial0 = &uart0;
+	};	
+
+	gpio-leds {
+		compatible = "gpio-leds";
+
+		white_led: led-1 {
+			function = LED_FUNCTION_STATUS;
+			color = <LED_COLOR_ID_WHITE>;
+			gpios = <&pio 34 GPIO_ACTIVE_LOW>;
+		};
+
+		red_led: led-2 {
+			function = LED_FUNCTION_STATUS;
+			color = <LED_COLOR_ID_RED>;
+			gpios = <&pio 35 GPIO_ACTIVE_LOW>;
+		};
+	};
+};
+
+&chosen {
+	/delete-property/ bootargs-override;
+};

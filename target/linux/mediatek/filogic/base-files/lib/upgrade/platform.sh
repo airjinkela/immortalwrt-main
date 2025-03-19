@@ -66,6 +66,7 @@ platform_do_upgrade() {
 	local board=$(board_name)
 
 	case "$board" in
+	cmcc,rax3000z-emmc|\
 	cmcc,rax3000m-emmc)
 		CI_KERNPART="kernel"
 		CI_ROOTPART="rootfs"
@@ -199,6 +200,7 @@ platform_check_image() {
 	bananapi,bpi-r4|\
 	bananapi,bpi-r4-poe|\
 	cmcc,xr30*|\
+	cmcc,rax3000z*|\
 	cmcc,rax3000m*)
 		[ "$magic" != "d00dfeed" ] && {
 			[ "$magic" != "73797375" ] && {
@@ -223,6 +225,7 @@ platform_copy_config() {
 	acer,predator-w6d|\
 	acer,vero-w6m|\
 	arcadyan,mozart|\
+	cmcc,rax3000z-emmc|\
 	cmcc,rax3000m-emmc|\
 	glinet,gl-mt2500|\
 	glinet,gl-mt6000|\

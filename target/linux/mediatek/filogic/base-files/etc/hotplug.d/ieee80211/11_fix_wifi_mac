@@ -61,6 +61,7 @@ case "$board" in
 		[ "$PHYNBR" = "2" ] && macaddr_add $addr 4 > /sys${DEVPATH}/macaddress
 		;;
 	cmcc,xr30*|\
+	cmcc,rax3000z*|\
 	cmcc,rax3000m*)
 		addr=$(cat /sys/class/net/eth0/address)
 		[ "$PHYNBR" = "1" ] && macaddr_add $addr -1 > /sys${DEVPATH}/macaddress
