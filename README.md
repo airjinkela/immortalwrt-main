@@ -8,16 +8,18 @@
 > 未描述设备均为未测试
 
 |    设备                 |device                               |             | 情况               |
-| ------------------------| ------------------------------------|-------------| -------------------|
-|X86                      | *                                   |             |支持并正常运行        |
-|Netgear R6300 V2         | netgear_r6300-v2                    |bmc53xx      |支持并正常运行        |
-|FriendlyARM NanoPi R5C   | friendlyarm_nanopi-r5c              |rk3568       |支持并正常运行        |
-|Nradio C2000-410         |nradio_c2000-410                     |mt7620a      |支持并正常运行        |
-|cudy tr3000              | cudy_tr3000-v1-mod \| cudy_tr3000-v1|mt7981b      |支持并正常运行        |
-|CMCC xr30 (NAND version) | cmcc_xr30-nand                      |mt7981b      |支持并正常运行        |
-|Zbtlink ZBT-Z8102AX-V2   | zbtlink_zbt-z8102ax-v2              |mt7981b      |支持并正常运行        |
-|Linksys MR8300           | linksys_mr8300                      |qcom-ipq4019 |支持并正常运行        |
-|MobiPromo CM520-79F      | mobipromo_cm520-79f                 |qcom-ipq4019 |无法启动?             |
+| ----------------------------| ------------------------------------|-------------| -------------------|
+|X86                          | *                                   |             |支持并正常运行        |
+|Netgear R6300 V2             | netgear_r6300-v2                    |bmc53xx      |支持并正常运行        |
+|FriendlyARM NanoPi R5C       | friendlyarm_nanopi-r5c              |rk3568       |支持并正常运行        |
+|Nradio C2000-410             |nradio_c2000-410                     |mt7620a      |支持并正常运行        |
+|cudy tr3000                  | cudy_tr3000-v1-mod \| cudy_tr3000-v1|mt7981b      |支持并正常运行        |
+|CMCC rax3000Z (EMMC version) | cmcc_rax3000z-emmc                  |mt7981b      |支持并正常运行        |
+|CMCC rax3000M                | cmcc_rax3000m*                      |mt7981b      |支持并正常运行        |
+|CMCC xr30 (NAND version)     | cmcc_xr30-nand                      |mt7981b      |支持并正常运行        |
+|Zbtlink ZBT-Z8102AX-V2       | zbtlink_zbt-z8102ax-v2              |mt7981b      |支持并正常运行        |
+|Linksys MR8300               | linksys_mr8300                      |qcom-ipq4019 |支持并正常运行        |
+|MobiPromo CM520-79F          | mobipromo_cm520-79f                 |qcom-ipq4019 |无法启动?             |
 
 ## 编译常见变量名
 <details>
