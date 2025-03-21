@@ -2104,3 +2104,19 @@ define Device/zbtlink_zbt-z8102ax-v2
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += zbtlink_zbt-z8102ax-v2
+
+define Device/hc-g80
+  DEVICE_VENDOR := HC
+  DEVICE_MODEL := HC-G80
+  DEVICE_DTS := mt7981b-hc-g80
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware kmod-usb3 kmod-usb-serial-option kmod-hwmon-gpiofan
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  IMAGE_SIZE := 114816k
+  KERNEL_IN_UBI := 1
+  IMAGES += factory.bin
+  IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
+endef
+TARGET_DEVICES += hc-g80

@@ -38,6 +38,16 @@ cudy,re3000-v1)
 cudy,wr3000-v1)
 	ucidef_set_led_netdev "wan" "wan" "blue:wan" "wan"
 	;;
+hc,hc-g80)
+	ucidef_set_led_default "system" "system" "system" "1"
+	ucidef_set_led_timer "wdg" "wdg" "wdg" 1000 1000
+	ucidef_set_led_netdev "gpy" "wan" "wan" "eth1"
+	ucidef_set_led_netdev "wan" "wan" "net" "eth1"
+	ucidef_set_led_netdev "wwan" "wwan" "wwan" "wwan0"
+	ucidef_set_led_netdev "wlan2g" "WLAN2G" "2gwifi" "phy0-ap0"
+	ucidef_set_led_netdev "wlan5g" "WLAN5G" "5gwifi" "phy1-ap0"
+
+	;;
 glinet,gl-x3000|\
 glinet,gl-xe3000)
 	ucidef_set_led_default "power" "POWER" "green:power" "1"
