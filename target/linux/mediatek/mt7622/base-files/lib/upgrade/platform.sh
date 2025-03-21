@@ -32,7 +32,7 @@ platform_do_upgrade() {
 	dlink,eagle-pro-ai-r32-a1|\
 	elecom,wrc-x3200gst3|\
 	mediatek,mt7622-rfb1-ubi|\
-	netgear,wax206|\
+	netgear,wax206*|\
 	totolink,a8000ru)
 		nand_do_upgrade "$1"
 		;;
@@ -72,7 +72,7 @@ platform_check_image() {
 	dlink,eagle-pro-ai-r32-a1|\
 	elecom,wrc-x3200gst3|\
 	mediatek,mt7622-rfb1-ubi|\
-	netgear,wax206|\
+	netgear,wax206*|\
 	smartrg,sdg-841-t6|\
 	totolink,a8000ru)
 		nand_do_platform_check "$board" "$1"
