@@ -259,7 +259,7 @@
 			#size-cells = <1>;
 
 			partition@0 {
-				label = "BL2";
+				label = "bl2";
 				reg = <0x00000 0x0100000>;
 				read-only;
 			};
@@ -267,15 +267,17 @@
 			partition@100000 {
 				label = "u-boot-env";
 				reg = <0x0100000 0x0080000>;
+				read-only;
 			};
 
-			partition@180000 {
-				label = "Factory";
+			factory: partition@180000 {
+				label = "factory";
 				reg = <0x180000 0x0200000>;
+				read-only;
 			};
 
 			partition@380000 {
-				label = "FIP";
+				label = "fip";
 				reg = <0x380000 0x0200000>;
 			};
 
@@ -305,7 +307,6 @@
 		ig,enable-spi = <1>;     /* 1: Enable, 0: Disable */
 	};
 };
-
 
 &pio {
 	fan_pin: fan_pin {
@@ -382,4 +383,9 @@
 			groups = "spi1_1";
 		};
 	};
+};
+
+&wifi {
+	status = "okay";
+	mediatek,mtd-eeprom = <&factory 0x0>;
 };
