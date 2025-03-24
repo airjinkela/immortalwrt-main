@@ -6,15 +6,18 @@
 / {
 	model = "HC HC-G80";
 	compatible = "HC,HC-G80", "mediatek,mt7981";
-	chosen: chosen {
-		bootargs = "console=ttyS0,115200n1 loglevel=8  \
-				earlycon=uart8250,mmio32,0x11002000";
+
+	aliases {
+		serial0 = &uart0;
 	};
 
 	memory {
-		// fpga ddr2: 128MB*2
-		reg = <0 0x40000000 0 0x10000000>;
-	}; 
+		reg = <0x00 0x40000000 0x00 0x10000000>;
+	};
+
+	chosen: chosen {
+		stdout-path = "serial0:115200n8";
+	};
 
 	gpio-keys {
 		compatible = "gpio-keys";
@@ -34,6 +37,10 @@
 		/* We don't know the exact rpm, just use dummy values here. */
 		gpio-fan,speed-map = <0 0>, <1 1>, <2 2>;
 		#cooling-cells = <2>;
+	};
+
+	reserved-memory {
+		/delete-node/ramoops@42ff0000;
 	};
 
     gpio-leds {
@@ -140,19 +147,8 @@
 	status = "okay";
 };
 
-&uart0 {
-	status = "okay";
-};
-
 &watchdog {
-	status = "okay";
-};
-
-&xhci {
-	mediatek,u3p-dis-msk = <0x0>;
-	phys = <&u2port0 PHY_TYPE_USB2>,
-	       <&u3port0 PHY_TYPE_USB3>;
-	status = "okay";
+	status = "okay";	
 };
 
 &eth {
@@ -169,7 +165,7 @@
 			pause;
 		};
 	};
-	
+
 	gmac1: mac@1 {
 		compatible = "mediatek,eth-mac";
 		reg = <1>;
@@ -180,16 +176,16 @@
 
 &mdio_bus {
 	switch: switch@1f {
-        compatible = "mediatek,mt7531";
-        reg = <31>;
-        reset-gpios = <&pio 39 GPIO_ACTIVE_HIGH>;
-
-		// interrupt-controller;
-		// #interrupt-cells = <1>;
-		// interrupt-parent = <&pio>;
-		// interrupts = <38 IRQ_TYPE_LEVEL_HIGH>;
+		compatible = "mediatek,mt7531";
+		reg = <31>;
+		reset-gpios = <&pio 39 GPIO_ACTIVE_HIGH>;
+		interrupt-controller;
+		#interrupt-cells = <1>;
+		interrupt-parent = <&pio>;
+		interrupts = <38 IRQ_TYPE_LEVEL_HIGH>;
 	};
 };
+
 
 &switch {
     ports {
@@ -246,9 +242,16 @@
 		compatible = "spi-nand";
 		reg = <0>;
 		spi-max-frequency = <52000000>;
-		spi-tx-buswidth = <4>;
-		spi-rx-buswidth = <4>;
 
+		spi-cal-enable;
+		spi-cal-mode = "read-data";
+		spi-cal-datalen = <7>;
+		spi-cal-data = /bits/ 8 <0x53 0x50 0x49 0x4E 0x41 0x4E 0x44>;
+		spi-cal-addrlen = <5>;
+		spi-cal-addr = /bits/ 32 <0x0 0x0 0x0 0x0 0x0>;
+
+		spi-tx-bus-width = <4>;
+		spi-rx-bus-width = <4>;
 		mediatek,nmbm;
 		mediatek,bmt-max-ratio = <1>;
 		mediatek,bmt-max-reserved-blocks = <64>;
@@ -322,38 +325,10 @@
 		};
 	};
 
-	i2c_pins: i2c-pins-g0 {
-		mux {
-				function = "i2c";
-				groups = "i2c0_0";
-		};
-	};
-
 	pcm_pins: pcm-pins-g0 {
 			mux {
 					function = "pcm";
 					groups = "pcm";
-			};
-	};
-
-	pwm0_pin: pwm0-pin-g0 {
-			mux {
-					function = "pwm";
-					groups = "pwm0_0";
-			};
-	};
-
-	pwm1_pin: pwm1-pin-g0 {
-			mux {
-					function = "pwm";
-					groups = "pwm1_0";
-			};
-	};
-
-	pwm2_pin: pwm2-pin {
-			mux {
-					function = "pwm";
-					groups = "pwm2";
 			};
 	};
 
@@ -385,7 +360,23 @@
 	};
 };
 
+
+&uart0 {
+	status = "okay";
+};
+
+&usb_phy {
+	status = "okay";
+};
+
+&watchdog {
+	status = "okay";
+};
+
 &wifi {
 	status = "okay";
-	mediatek,mtd-eeprom = <&factory 0x0>;
+};
+
+&xhci {
+	status = "okay";
 };

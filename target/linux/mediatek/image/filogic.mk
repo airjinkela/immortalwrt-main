@@ -2110,7 +2110,7 @@ define Device/hc-g80
   DEVICE_MODEL := HC-G80
   DEVICE_DTS := mt7981b-hc-g80
   DEVICE_DTS_DIR := ../dts
-  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware kmod-usb3 kmod-usb-serial-option kmod-hwmon-gpiofan
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware kmod-usb2 kmod-usb3 kmod-usb-serial-option kmod-hwmon-gpiofan
   UBINIZE_OPTS := -E 5
   BLOCKSIZE := 128k
   PAGESIZE := 2048
