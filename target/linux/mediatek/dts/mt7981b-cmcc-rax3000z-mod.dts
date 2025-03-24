@@ -18,6 +18,8 @@
 	gpio-leds {
 		compatible = "gpio-leds";
 
+		/delete-property/ led-0;
+
 		white_led: led-1 {
 			function = LED_FUNCTION_STATUS;
 			color = <LED_COLOR_ID_WHITE>;
