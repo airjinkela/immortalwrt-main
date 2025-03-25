@@ -2105,7 +2105,7 @@ define Device/zbtlink_zbt-z8102ax-v2
 endef
 TARGET_DEVICES += zbtlink_zbt-z8102ax-v2
 
-define Device/hc-g80
+define Device/hc_hc-g80
   DEVICE_VENDOR := HC
   DEVICE_MODEL := HC-G80
   DEVICE_DTS := mt7981b-hc-g80
@@ -2118,5 +2118,6 @@ define Device/hc-g80
   KERNEL_IN_UBI := 1
   IMAGES += factory.bin
   IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-TARGET_DEVICES += hc-g80
+TARGET_DEVICES += hc_hc-g80

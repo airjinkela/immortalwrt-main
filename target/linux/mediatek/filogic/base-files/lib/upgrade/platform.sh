@@ -72,9 +72,7 @@ platform_do_upgrade() {
 		CI_ROOTPART="rootfs"
 		emmc_do_upgrade "$1"
 		;;
-	hc,hc-g80)
-		nand_do_upgrade "$1"
-		;;
+	hc,hc-g80|\
 	abt,asr3000|\
 	bananapi,bpi-r3|\
 	bananapi,bpi-r3-mini|\
@@ -210,6 +208,13 @@ platform_check_image() {
 				echo "Invalid image type."
 				return 1
 			}
+		}
+		return 0
+		;;
+	hc,hc-g80)
+		[ "$magic" != "73797375" ] && {
+			echo "Invalid image type."
+			return 1
 		}
 		return 0
 		;;

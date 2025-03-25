@@ -5,18 +5,19 @@
 
 / {
 	model = "HC HC-G80";
-	compatible = "HC,HC-G80", "mediatek,mt7981";
+	compatible = "hc,hc-g80", "mediatek,mt7981";
 
 	aliases {
 		serial0 = &uart0;
 	};
 
-	memory {
-		reg = <0x00 0x40000000 0x00 0x10000000>;
+	memory@40000000 {
+		reg = <0 0x40000000 0 0x10000000>;
 	};
 
 	chosen: chosen {
 		stdout-path = "serial0:115200n8";
+		bootargs = "earlycon=uart8250,mmio32,0x11002000 console=ttyS0,115200n8 loglevel=8";
 	};
 
 	gpio-keys {
@@ -28,7 +29,7 @@
 		};		
 	};
 
-	why: gpio-fan {
+	fan_00: gpio-fan {
 		compatible = "gpio-fan";
 
 		pinctrl-0 = <&fan_pin>;
@@ -40,21 +41,14 @@
 	};
 
 	reserved-memory {
-		/delete-node/ramoops@42ff0000;
+		/delete-node/ ramoops@42ff0000;
 	};
 
     gpio-leds {
 		compatible = "gpio-leds";
 		system {
 			label = "system";
-			function = LED_FUNCTION_STATUS;
 			gpios = <&pio 25 GPIO_ACTIVE_LOW>;
-		};
-
-		wdg {
-			label = "wdg";
-			function = LED_FUNCTION_STATUS;
-			gpios = <&pio 2 GPIO_ACTIVE_HIGH>;
 		};
 
 		wan {
@@ -99,6 +93,14 @@
 				gpios = <&pio 6 GPIO_ACTIVE_HIGH>;
 		};
     };
+
+	gpio-watchdog {
+		compatible = "linux,wdt-gpio";
+		gpios = <&pio 2 GPIO_ACTIVE_HIGH>;
+		hw_algo = "toggle";
+		hw_margin_ms = <1000>;
+		always-running;
+	};
 };
 
 
@@ -125,26 +127,20 @@
 
     cooling-maps {
         cpu-active-low {
-            cooling-device = <&why 1 1>;
+            cooling-device = <&fan_00 1 1>;
             trip = <&cpu_trip_active_low>;
         };
 
         cpu-active-med {
-            cooling-device = <&why 1 1>;
+            cooling-device = <&fan_00 1 1>;
             trip = <&cpu_trip_active_med>;
         };
 
         cpu-active-high {
-            cooling-device = <&why 1 1>;
+            cooling-device = <&fan_00 1 1>;
             trip = <&cpu_trip_active_high>;
         };
     };
-};
-
-&afe {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pcm_pins>;
-	status = "okay";
 };
 
 &watchdog {
@@ -159,6 +155,9 @@
 		reg = <0>;
 		phy-mode = "2500base-x";
 
+		nvmem-cells = <&macaddr_lan>;
+		nvmem-cell-names = "mac-address";
+
 		fixed-link {
 			speed = <2500>;
 			full-duplex;
@@ -171,6 +170,9 @@
 		reg = <1>;
 		phy-mode = "gmii";
 		phy-handle = <&int_gbe_phy>;
+
+		nvmem-cells = <&macaddr_wan>;
+		nvmem-cell-names = "mac-address";
 	};
 };
 
@@ -277,6 +279,26 @@
 				label = "factory";
 				reg = <0x180000 0x0200000>;
 				read-only;
+				nvmem-layout {
+					compatible = "fixed-layout";
+					#address-cells = <1>;
+					#size-cells = <1>;
+
+					macaddr_wifi: macaddr@4 {
+						reg = <0x4 0x6>;
+						compatible = "mac-base";
+						#nvmem-cell-cells = <1>;
+					};
+
+					macaddr_wan: macaddr@24 {
+						reg = <0x24 0x6>;
+					};
+
+					macaddr_lan: macaddr@2a {
+						reg = <0x2a 0x6>;
+					};
+
+				};
 			};
 
 			partition@380000 {
@@ -325,13 +347,6 @@
 		};
 	};
 
-	pcm_pins: pcm-pins-g0 {
-			mux {
-					function = "pcm";
-					groups = "pcm";
-			};
-	};
-
 	spi0_flash_pins: spi0-pins {
 		mux {
 			function = "spi";
@@ -375,6 +390,19 @@
 
 &wifi {
 	status = "okay";
+	mediatek,mtd-eeprom = <&factory 0x0>;
+
+	wifi_band_0: band@0 {
+		reg = <0>;
+		nvmem-cells = <&macaddr_wifi 0>;
+		nvmem-cell-names = "mac-address";
+	};
+
+	band@1 {
+		reg = <1>;
+		nvmem-cells = <&macaddr_wifi 1>;
+		nvmem-cell-names = "mac-address";
+	};
 };
 
 &xhci {
