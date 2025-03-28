@@ -5,10 +5,11 @@
 
 / {
 	model = "HC HC-G80";
-	compatible = "hc,hc-g80", "mediatek,mt7981";
+	compatible = "hc,hc-g80", "HC,HC-G80","mediatek,mt7981";
 
 	aliases {
 		serial0 = &uart0;
+		led-running = &led_system;
 	};
 
 	memory@40000000 {
@@ -46,7 +47,7 @@
 
     gpio-leds {
 		compatible = "gpio-leds";
-		system {
+		led_system: system {
 			label = "system";
 			gpios = <&pio 25 GPIO_ACTIVE_LOW>;
 		};
