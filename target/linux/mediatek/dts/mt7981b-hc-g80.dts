@@ -9,6 +9,7 @@
 
 	aliases {
 		serial0 = &uart0;
+		led-running = &led_system;
 	};
 
 	memory@40000000 {
@@ -46,7 +47,7 @@
 
     gpio-leds {
 		compatible = "gpio-leds";
-		system {
+		led_system: system {
 			label = "system";
 			gpios = <&pio 25 GPIO_ACTIVE_LOW>;
 		};
