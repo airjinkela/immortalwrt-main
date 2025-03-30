@@ -2052,6 +2052,18 @@ define Device/zbtlink_zbt-z8102ax-v2
 endef
 TARGET_DEVICES += zbtlink_zbt-z8102ax-v2
 
+define Device/sl_3000
+  DEVICE_VENDOR := SL
+  DEVICE_MODEL := 3000 (NOR version)
+  DEVICE_DTS := mt7981b-sl-3000
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware kmod-usb3 \
+	automount f2fsck mkf2fs
+  KERNEL := kernel-bin | lzma | fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += sl_3000
+
 define Device/sl_3000-emmc
   DEVICE_VENDOR := SL
   DEVICE_MODEL := 3000-emmc (eMMC version)
@@ -2062,5 +2074,4 @@ define Device/sl_3000-emmc
   KERNEL := kernel-bin | lzma | fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-
 TARGET_DEVICES += sl_3000-emmc

@@ -57,6 +57,10 @@ xiaomi,redmi-router-ax6000-ubootmod|\
 zyxel,ex5601-t0-ubootmod)
 	ubootenv_add_ubi_default
 	;;
+sl,3000|\
+sl,3000-emmc)
+	ubootenv_add_uci_config "/dev/mmcblk0p1" "0x0" "0x80000" "0x80000"
+	;;
 acer,predator-w6|\
 acer,predator-w6d|\
 acer,vero-w6m|\
