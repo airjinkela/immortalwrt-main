@@ -26,3 +26,11 @@
 	path = package/ext/quectel_cm_5G
 	url = https://gitee.com/airjinkela/quectel_cm_5-g.git
 	branch = master
+[submodule "package/ext/UA3F"]
+	path = package/ext/UA3F
+	url = https://github.com/SunBK201/UA3F.git
+	branch = master
+[submodule "package/ext/rkp-ipid"]
+	path = package/ext/rkp-ipid
+	url = https://github.com/CHN-beta/rkp-ipid
+	branch = master
