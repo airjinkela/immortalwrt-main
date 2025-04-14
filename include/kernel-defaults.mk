@@ -157,7 +157,7 @@ define Kernel/Configure/Default
 				grep '=[ym]' $(LINUX_DIR)/.config.set | LC_ALL=C sort | $(MKHASH) md5 > $(TOPDIR)/vermagic )
 			)
 		$(CP) $(TOPDIR)/vermagic $(LINUX_DIR)/.vermagic;,\
-		$(info Use General Kernel Version Magic);\
+		$(info Use General Kernel Version Magic) \
 		grep '=[ym]' $(LINUX_DIR)/.config.set | LC_ALL=C sort | $(MKHASH) md5 > $(LINUX_DIR)/.vermagic)
 endef
 
