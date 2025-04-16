@@ -119,6 +119,7 @@ platform_do_upgrade() {
 	glinet,gl-x3000|\
 	glinet,gl-xe3000|\
 	huasifei,wh3000-emmc|\
+	sl,3000-emmc|\
 	smartrg,sdg-8612|\
 	smartrg,sdg-8614|\
 	smartrg,sdg-8622|\
@@ -208,6 +209,15 @@ platform_check_image() {
 				echo "Invalid image type."
 				return 1
 			}
+		}
+		return 0
+		;;
+	sl,3000-emmc)
+		# tar magic `ustar`
+		magic="$(dd if="$1" bs=1 skip=257 count=5 2>/dev/null)"
+		[ "$magic" != "ustar" ] && {
+			echo "Invalid image type."
+			return 1
 		}
 		return 0
 		;;

@@ -39,6 +39,7 @@ mediatek_setup_interfaces()
 	cmcc,a10-ubootmod|\
 	confiabits,mt7981|\
 	cudy,wr3000-v1|\
+	sl,3000*|\
 	jcg,q30-pro|\
 	livinet,zr-3020|\
 	livinet,zr-3020-ubootmod|\
@@ -202,6 +203,16 @@ mediatek_setup_macs()
 		label_mac=$(mtd_get_mac_ascii product_info ethaddr)
 		wan_mac=$label_mac
 		lan_mac=$(macaddr_add "$label_mac" 1)
+		;;
+	sl,3000)
+		lan_mac=$(mtd_get_mac_binary Factory 0x04)
+		wan_mac=$(macaddr_add $lan_mac -2)
+		label_mac=$wan_mac
+		;;
+	sl,3000-emmc)
+		lan_mac=$(mmc_get_mac_binary factory 0x04)
+		wan_mac=$(macaddr_add $lan_mac -2)
+		label_mac=$wan_mac
 		;;
 	xiaomi,mi-router-ax3000t|\
 	xiaomi,mi-router-ax3000t-mod|\
