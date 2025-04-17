@@ -19,6 +19,7 @@
 |CMCC xr30 (NAND version)     | cmcc_xr30-nand                      |mt7981b      |支持并正常运行        |
 |Zbtlink ZBT-Z8102AX-V2       | zbtlink_zbt-z8102ax-v2              |mt7981b      |支持并正常运行        |
 |SL 3000                      | sl_3000 \| sl_3000-emmc             |mt7981b      |支持并正常运行        |
+|Cetron CT3003 (emmc)         | cetron_ct3003-emmc                  |mt7981b      |支持并正常运行        |
 |HC HC-G80                    | hc_hc-g80                           |mt7981b      |支持并正常运行        |
 |Linksys MR8300               | linksys_mr8300                      |qcom-ipq4019 |支持并正常运行        |
 |MobiPromo CM520-79F          | mobipromo_cm520-79f                 |qcom-ipq4019 |无法启动?            |
