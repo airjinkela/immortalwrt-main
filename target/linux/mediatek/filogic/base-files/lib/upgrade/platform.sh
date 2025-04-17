@@ -67,7 +67,8 @@ platform_do_upgrade() {
 
 	case "$board" in
 	cmcc,rax3000z-emmc|\
-	cmcc,rax3000m-emmc)
+	cmcc,rax3000m-emmc|\
+	cetron,ct3003-emmc)
 		CI_KERNPART="kernel"
 		CI_ROOTPART="rootfs"
 		emmc_do_upgrade "$1"
@@ -238,6 +239,7 @@ platform_copy_config() {
 	arcadyan,mozart|\
 	cmcc,rax3000z-emmc|\
 	cmcc,rax3000m-emmc|\
+	cetron,ct3003-emmc|\
 	glinet,gl-mt2500|\
 	glinet,gl-mt6000|\
 	glinet,gl-x3000|\

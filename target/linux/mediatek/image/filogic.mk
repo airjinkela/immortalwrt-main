@@ -2143,3 +2143,15 @@ define Device/sl_3000-emmc
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += sl_3000-emmc
+
+define Device/cetron_ct3003-emmc
+  DEVICE_VENDOR := CETRON
+  DEVICE_MODEL := CT3003 (eMMC version)
+  DEVICE_DTS := mt7981b-cetron-ct3003-emmc
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware kmod-usb3 \
+	automount f2fsck mkf2fs lsblk
+  KERNEL := kernel-bin | lzma | fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += cetron_ct3003-emmc
