@@ -51,7 +51,6 @@ glinet,gl-xe3000)
 	;;
 huasifei,wh3000-emmc)
 	ucidef_set_led_netdev "wan" "WAN" "red:wan" "eth1"
-	ucidef_set_led_netdev "wlan" "WLAN" "white:wlan" "phy1-ap0"
 	;;
 imou,lc-hx3001|\
 nokia,ea0326gmp)
@@ -72,8 +71,16 @@ mercusys,mr90x-v1-ubi)
 	ucidef_set_led_netdev "lan-2" "lan-2" "green:lan-2" "lan2" "link tx rx"
 	ucidef_set_led_netdev "wan" "wan" "green:wan" "eth1" "link tx rx"
 	;;
+netcore,n60-pro)
+	ucidef_set_led_netdev "wanlink" "WANLINK" "mdio-bus:06:green:wan" "eth1" "link_10 link_100 link_1000 link_2500 tx rx"
+	ucidef_set_led_netdev "lan-1" "LAN-1" "mdio-bus:05:green:lan" "lan1" "link_10 link_100 link_1000 link_2500 tx rx"
+	ucidef_set_led_netdev "wan" "WAN" "blue:wan" "eth1" "link"
+	;;
 netgear,wax220)
 	ucidef_set_led_netdev "eth0" "LAN" "green:lan" "eth0"
+	;;
+netis,nx31)
+	ucidef_set_led_netdev "wan" "wan" "blue:wan" "eth1" "link tx rx"
 	;;
 openembed,som7981)
 	ucidef_set_led_netdev "lanact" "LANACT" "amber:lan" "eth1" "rx tx"

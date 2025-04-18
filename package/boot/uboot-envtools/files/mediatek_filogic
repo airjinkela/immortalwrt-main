@@ -44,6 +44,8 @@ jcg,q30-pro|\
 livinet,zr-3020-ubootmod|\
 mercusys,mr90x-v1-ubi|\
 netcore,n60|\
+netcore,n60-pro|\
+netis,nx31|\
 nokia,ea0326gmp|\
 qihoo,360t7|\
 routerich,ax3000-ubootmod|\
@@ -80,6 +82,7 @@ bananapi,bpi-r3-mini|\
 bananapi,bpi-r4|\
 bananapi,bpi-r4-poe|\
 cmcc,rax3000m|\
+cmcc,rax3000me|\
 jdcloud,re-cp-03|\
 konka,komi-a31)
 	. /lib/upgrade/fit.sh

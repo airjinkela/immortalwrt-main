@@ -84,6 +84,7 @@ platform_do_upgrade() {
 	cmcc,rax3000m-nand|\
 	cmcc,a10-ubootmod|\
 	cmcc,rax3000m|\
+	cmcc,rax3000me|\
 	cudy,tr3000-v1-ubootmod|\
 	gatonetworks,gdsp|\
 	h3c,magic-nx30-pro|\
@@ -95,9 +96,11 @@ platform_do_upgrade() {
 	mediatek,mt7981-rfb|\
 	mediatek,mt7988a-rfb|\
 	mercusys,mr90x-v1-ubi|\
+	netis,nx31|\
 	nokia,ea0326gmp|\
 	openwrt,one|\
 	netcore,n60|\
+	netcore,n60-pro|\
 	qihoo,360t7|\
 	routerich,ax3000-ubootmod|\
 	tplink,tl-xdr4288|\
@@ -204,7 +207,8 @@ platform_check_image() {
 	bananapi,bpi-r4-poe|\
 	cmcc,xr30*|\
 	cmcc,rax3000z*|\
-	cmcc,rax3000m*)
+	cmcc,rax3000m*|\
+	cmcc,rax3000me)
 		[ "$magic" != "d00dfeed" ] && {
 			[ "$magic" != "73797375" ] && {
 				echo "Invalid image type."
@@ -261,7 +265,8 @@ platform_copy_config() {
 	bananapi,bpi-r4|\
 	bananapi,bpi-r4-poe|\
 	cmcc,xr30*|\
-	cmcc,rax3000m*)
+	cmcc,rax3000m*|\
+	cmcc,rax3000me)
 		if [ "$CI_METHOD" = "emmc" ]; then
 			emmc_copy_config
 		fi
