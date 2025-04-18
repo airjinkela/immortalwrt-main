@@ -46,10 +46,32 @@
 						reg = <0x100000 0x80000>;
 					};
 
-					factory: partition@180000 {
+					partition@180000 {
 						label = "factory";
 						reg = <0x180000 0x200000>;
 						read-only;
+
+						nvmem-layout {
+							compatible = "fixed-layout";
+							#address-cells = <1>;
+							#size-cells = <1>;
+
+							eeprom_factory_0: eeprom@0 {
+								reg = <0x0 0x1000>;
+							};
+
+							macaddr_factory_24: macaddr@24 {
+								compatible = "mac-base";
+								reg = <0x24 0x6>;
+								#nvmem-cell-cells = <1>;
+							};
+
+							macaddr_factory_2a: macaddr@2a {
+								compatible = "mac-base";
+								reg = <0x2a 0x6>;
+								#nvmem-cell-cells = <1>;
+							};
+						};
 					};
 
 					partition@380000 {
@@ -66,27 +88,38 @@
 	};
 };
 
+&gmac0 {
+	nvmem-cells = <&macaddr_factory_2a 0>;
+	nvmem-cell-names = "mac-address";
+};
+
+&gmac1 {
+	nvmem-cells = <&macaddr_factory_24 0>;
+	nvmem-cell-names = "mac-address";
+};
+
 &pio {
 	spi0_flash_pins: spi0-pins {
-				mux {
-					function = "spi";
-					groups = "spi0", "spi0_wp_hold";
-				};
+		mux {
+			function = "spi";
+			groups = "spi0", "spi0_wp_hold";
+		};
 
-				conf-pu {
-					pins = "SPI0_CS", "SPI0_HOLD", "SPI0_WP";
-					drive-strength = <8>;
-					mediatek,pull-up-adv = <0>; /* bias-disable */
-				};
+		conf-pu {
+			pins = "SPI0_CS", "SPI0_HOLD", "SPI0_WP";
+			drive-strength = <8>;
+			mediatek,pull-up-adv = <0>; /* bias-disable */
+		};
 
-				conf-pd {
-					pins = "SPI0_CLK", "SPI0_MOSI", "SPI0_MISO";
-					drive-strength = <8>;
-					mediatek,pull-up-adv = <0>; /* bias-disable */
-				};
+		conf-pd {
+			pins = "SPI0_CLK", "SPI0_MOSI", "SPI0_MISO";
+			drive-strength = <8>;
+			mediatek,pull-up-adv = <0>; /* bias-disable */
+		};
 	};
 };
 
 &wifi {
-	mediatek,mtd-eeprom = <&factory 0x0>;
+	nvmem-cells = <&eeprom_factory_0>;
+	nvmem-cell-names = "eeprom";
 };
