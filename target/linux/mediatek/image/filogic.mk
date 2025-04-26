@@ -2264,3 +2264,15 @@ define Device/cetron_ct3003-emmc
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += cetron_ct3003-emmc
+
+define Device/clx_s20l
+  DEVICE_VENDOR := CLX
+  DEVICE_MODEL := s20l (eMMC)
+  DEVICE_DTS := mt7986a-clx-s20l
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7915-firmware kmod-mt7986-firmware mt7986-wo-firmware kmod-usb3 \
+	automount f2fsck mkf2fs cfdisk e2fsprogs
+  KERNEL := kernel-bin | lzma | fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += clx_s20l

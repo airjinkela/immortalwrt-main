@@ -95,6 +95,9 @@ mediatek_setup_interfaces()
 	zyxel,nwa50ax-pro)
 		ucidef_set_interface_lan "eth0"
 		;;
+	clx,s20l)
+		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4" wan
+	;;
 	cudy,m3000-v1|\
 	cudy,tr3000-v1|\
 	cudy,tr3000-v1-mod|\

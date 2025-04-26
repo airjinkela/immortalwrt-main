@@ -32,6 +32,11 @@ confiabits,mt7981)
 	ucidef_set_led_netdev "lan3" "lan3" "blue:lan-3" "lan3" "link tx rx"
 	ucidef_set_led_netdev "wan" "wan" "blue:wan" "wan" "link tx rx"
 	;;
+clx,s20*)
+	ucidef_set_led_netdev "wlan5g" "5G" "wlan5g" "phy1-ap0"
+	ucidef_set_led_netdev "wlan2g" "2.4G" "wlan2g" "phy0-ap0"
+	ucidef_set_led_timer "sys" "SYS" "sys" "1000" "2000"
+	;;
 cudy,re3000-v1)
 	ucidef_set_led_netdev "lan" "lan" "green:lan" "eth0" "link tx rx"
 	;;
