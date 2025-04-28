@@ -57,7 +57,8 @@ DEFAULT_PACKAGES.router:=\
 	odhcp6c \
 	odhcpd-ipv6only \
 	ppp \
-	ppp-mod-pppoe
+	ppp-mod-pppoe \
+  luci-theme-argon
 ##@
 # @brief For easy usage
 ##
