@@ -2276,3 +2276,17 @@ define Device/clx_s20l
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += clx_s20l
+
+define Device/yvr_x6
+  DEVICE_VENDOR := DaZoo
+  DEVICE_MODEL := yvr-x6 (ax6000)
+  DEVICE_DTS := mt7986a-yvr-x6
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7915-firmware kmod-mt7986-firmware mt7986-wo-firmware kmod-usb3 automount
+  KERNEL := kernel-bin | lzma | fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
+  BLOCKSIZE := 256k
+  PAGESIZE := 4096
+  KERNEL_IN_UBI := 1
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += yvr_x6
