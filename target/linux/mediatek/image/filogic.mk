@@ -2270,7 +2270,7 @@ define Device/clx_s20l
   DEVICE_MODEL := s20l (eMMC)
   DEVICE_DTS := mt7986a-clx-s20l
   DEVICE_DTS_DIR := ../dts
-  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7915-firmware kmod-mt7986-firmware mt7986-wo-firmware kmod-usb3 \
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7986-firmware mt7986-wo-firmware kmod-usb3 \
 	automount f2fsck mkf2fs lsblk
   KERNEL := kernel-bin | lzma | fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
@@ -2282,7 +2282,7 @@ define Device/yvr_x6
   DEVICE_MODEL := yvr-x6 (ax6000)
   DEVICE_DTS := mt7986a-yvr-x6
   DEVICE_DTS_DIR := ../dts
-  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7915-firmware kmod-mt7986-firmware mt7986-wo-firmware kmod-usb3 automount
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7986-firmware mt7986-wo-firmware kmod-usb3 automount
   KERNEL := kernel-bin | lzma | fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
   BLOCKSIZE := 256k
   PAGESIZE := 4096
