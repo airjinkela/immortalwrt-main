@@ -65,6 +65,9 @@ mediatek_setup_interfaces()
 	zyxel,ex5601-t0-ubootmod)
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4" eth1
 		;;
+	clx,s20p)
+		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4 lan5 lan6" eth1
+		;;
 	asus,tuf-ax6000|\
 	glinet,gl-mt6000|\
 	tplink,tl-xdr4288|\

@@ -118,6 +118,7 @@ platform_do_upgrade() {
 	acer,predator-w6d|\
 	acer,vero-w6m|\
 	arcadyan,mozart|\
+	clx,s20p|\
 	clx,s20l|\
 	glinet,gl-mt2500|\
 	glinet,gl-mt6000|\
@@ -219,6 +220,7 @@ platform_check_image() {
 		return 0
 		;;
 	clx,s20l|\
+	clx,s20p|\
 	sl,3000-emmc)
 		# tar magic `ustar`
 		magic="$(dd if="$1" bs=1 skip=257 count=5 2>/dev/null)"
