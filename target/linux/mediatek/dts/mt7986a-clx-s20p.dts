@@ -26,7 +26,8 @@
 
 	chosen {
 		stdout-path = "serial0:115200n8";
-		bootargs-append = " root=PARTLABEL=rootfs rootwait";
+		bootargs-append = "root=PARTLABEL=rootfs rootwait rootfstype=squashfs,f2fs";
+
 	};
 
 	reg_1p8v: regulator-1p8v {
