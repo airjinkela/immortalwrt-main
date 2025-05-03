@@ -254,6 +254,8 @@ platform_copy_config() {
 	glinet,gl-xe3000|\
 	huasifei,wh3000-emmc|\
 	jdcloud,re-cp-03|\
+	clx,s20l|\
+	clx,s20p|\
 	smartrg,sdg-8612|\
 	smartrg,sdg-8614|\
 	smartrg,sdg-8622|\
