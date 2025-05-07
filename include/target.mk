@@ -57,8 +57,8 @@ DEFAULT_PACKAGES.router:=\
 	odhcp6c \
 	odhcpd-ipv6only \
 	ppp \
-	ppp-mod-pppoe \
-  luci-theme-argon
+	ppp-mod-pppoe
+  
 ##@
 # @brief For easy usage
 ##
@@ -71,7 +71,9 @@ DEFAULT_PACKAGES.tweak:=\
 	luci-app-package-manager \
 	luci-compat \
 	luci-lib-base \
-	luci-lib-ipkg
+	luci-lib-ipkg \
+  luci-theme-argon \
+  kmod-mtd-rw
 
 ifneq ($(DUMP),)
   all: dumpinfo
