@@ -34,3 +34,7 @@
 	path = package/ext/third
 	url = https://gitee.com/airjinkela/third.git
 	branch = master
+[submodule "package/ext/OpenAppFilter"]
+	path = package/ext/OpenAppFilter
+	url = https://github.com/destan19/OpenAppFilter.git
+	branch = master
