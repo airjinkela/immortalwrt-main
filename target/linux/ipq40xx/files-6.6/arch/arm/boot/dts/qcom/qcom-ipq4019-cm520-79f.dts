@@ -250,7 +250,7 @@
 				};
 			};
 
-			partition@b80000 {
+			root_part: partition@b80000 {
 				label = "ubi";
 				reg = <0xb80000 0x7480000>;
 			};

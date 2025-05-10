@@ -827,6 +827,18 @@ define Device/mobipromo_cm520-79f
 endef
 TARGET_DEVICES += mobipromo_cm520-79f
 
+define Device/mobipromo_cm520-79f-opboot
+	$(call Device/FitzImage)
+	$(call Device/UbiFit)
+	DEVICE_VENDOR := MobiPromo
+	DEVICE_MODEL := CM520-79F (op-boot)
+	SOC := qcom-ipq4019
+	BLOCKSIZE := 128k
+	PAGESIZE := 2048
+	DEVICE_PACKAGES := kmod-usb-ledtrig-usbport
+endef
+TARGET_DEVICES += mobipromo_cm520-79f-opboot
+
 define Device/netgear_ex61x0v2
 	$(call Device/DniImage)
 	DEVICE_VENDOR := NETGEAR
