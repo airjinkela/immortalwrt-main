@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+
+/dts-v1/;
+#include "mt7981b-ruijie-rg-x30e.dtsi"
+
+/ { 
+	model = "Ruijie RG-X30E (Uboot Mod)";
+	compatible = "ruijie,rg-x30e-mod", "mediatek,mt7981";
+
+};
+
+&partitions {
+	partition@880000 {
+		label = "ubi";
+		reg = <0x880000 0x6F80000>;
+	};
+};

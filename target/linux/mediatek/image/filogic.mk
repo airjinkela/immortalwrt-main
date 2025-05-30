@@ -2313,3 +2313,35 @@ define Device/ruijie_rg-x60-pro-mod
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += ruijie_rg-x60-pro-mod
+
+define Device/ruijie_rg-x30e-stock
+  DEVICE_VENDOR := Ruijie
+  DEVICE_MODEL := Ruijie RG-X30E Pro (stock layout)
+  DEVICE_DTS := mt7981b-ruijie-rg-x30e-stock
+  DEVICE_DTS_DIR := ../dts
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  IMAGE_SIZE := 114688k
+  KERNEL_IN_UBI := 1
+  IMAGES += factory.bin
+  IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += ruijie_rg-x30e-stock
+
+define Device/ruijie_rg-x30e-mod
+  DEVICE_VENDOR := Ruijie
+  DEVICE_MODEL := Ruijie RG-X30E (Uboot Mod)
+  DEVICE_DTS := mt7981b-ruijie-rg-x30e-mod
+  DEVICE_DTS_DIR := ../dts
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  IMAGE_SIZE := 114688k
+  KERNEL_IN_UBI := 1
+  IMAGES += factory.bin
+  IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += ruijie_rg-x30e-mod
