@@ -2313,3 +2313,14 @@ define Device/ruijie_rg-x60-pro-mod
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += ruijie_rg-x60-pro-mod
+
+define Device/netcore_n60-pro-mod
+  DEVICE_VENDOR := Netcore
+  DEVICE_MODEL := N60 Pro (U-Boot mod)
+  DEVICE_DTS := mt7986a-netcore-n60-pro-mod
+  DEVICE_DTS_DIR := ../dts
+  KERNEL_IN_UBI := 1
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7986-firmware mt7986-wo-firmware kmod-usb3 automount
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += netcore_n60-pro-mod
