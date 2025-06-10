@@ -2197,6 +2197,18 @@ define Device/cmcc_xr30-nand
 endef
 TARGET_DEVICES += cmcc_xr30-nand
 
+define Device/cmcc_xr30-emmc
+  DEVICE_VENDOR := CMCC
+  DEVICE_MODEL := XR30 EMMC
+  DEVICE_VARIANT := (U-Boot mod)
+  DEVICE_DTS := mt7981b-cmcc-xr30-emmc-mod
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware kmod-usb3 \
+	automount f2fsck mkf2fs lsblk cfdisk
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += cmcc_xr30-emmc
+
 define Device/zbtlink_zbt-z8102ax-v2
   DEVICE_VENDOR := Zbtlink
   DEVICE_MODEL := ZBT-Z8102AX-V2
