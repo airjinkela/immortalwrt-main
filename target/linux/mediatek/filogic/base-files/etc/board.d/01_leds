@@ -58,7 +58,7 @@ huasifei,wh3000-emmc)
 	ucidef_set_led_netdev "wan" "WAN" "red:wan" "eth1"
 	;;
 imou,lc-hx3001|\
-nokia,ea0326gmp)
+nokia,ea0326gmp*)
 	ucidef_set_led_netdev "wan" "WAN" "green:wan" "eth1" "link"
 	ucidef_set_led_netdev "lan" "LAN" "green:lan" "br-lan" "link"
 	ucidef_set_led_netdev "wlan" "WLAN" "green:wlan" "phy1-ap0" "link"

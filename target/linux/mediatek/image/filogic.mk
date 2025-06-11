@@ -2336,3 +2336,31 @@ define Device/netcore_n60-pro-mod
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += netcore_n60-pro-mod
+
+define Device/nokia_ea0326gmp-mod
+  DEVICE_VENDOR := Nokia
+  DEVICE_MODEL := EA0326GMP (U-Boot mod)
+  DEVICE_DTS := mt7981b-nokia-ea0326gmp-mod
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  KERNEL_IN_UBI := 1
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += nokia_ea0326gmp-mod
+
+define Device/nokia_ea0326gmp-mod-114
+  DEVICE_VENDOR := Nokia
+  DEVICE_MODEL := EA0326GMP (U-Boot mod 114)
+  DEVICE_DTS := mt7981b-nokia-ea0326gmp-mod-114
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  KERNEL_IN_UBI := 1
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += nokia_ea0326gmp-mod-114
