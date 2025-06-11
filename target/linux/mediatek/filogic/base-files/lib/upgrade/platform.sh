@@ -66,13 +66,6 @@ platform_do_upgrade() {
 	local board=$(board_name)
 
 	case "$board" in
-	cmcc,rax3000z-emmc|\
-	cmcc,rax3000m-emmc|\
-	cetron,ct3003-emmc)
-		CI_KERNPART="kernel"
-		CI_ROOTPART="rootfs"
-		emmc_do_upgrade "$1"
-		;;
 	abt,asr3000|\
 	bananapi,bpi-r3|\
 	bananapi,bpi-r3-mini|\
@@ -126,6 +119,9 @@ platform_do_upgrade() {
 	glinet,gl-xe3000|\
 	huasifei,wh3000-emmc|\
 	sl,3000-emmc|\
+	cmcc,rax3000z-emmc|\
+	cmcc,rax3000m-emmc|\
+	cetron,ct3003-emmc|\
 	smartrg,sdg-8612|\
 	smartrg,sdg-8614|\
 	smartrg,sdg-8622|\
@@ -207,24 +203,9 @@ platform_check_image() {
 	bananapi,bpi-r3-mini|\
 	bananapi,bpi-r4|\
 	bananapi,bpi-r4-poe|\
-	cmcc,xr30*|\
-	cmcc,rax3000z*|\
-	cmcc,rax3000m*|\
+	cmcc,rax3000m|\
 	cmcc,rax3000me)
 		[ "$magic" != "d00dfeed" ] && {
-			[ "$magic" != "73797375" ] && {
-				echo "Invalid image type."
-				return 1
-			}
-		}
-		return 0
-		;;
-	clx,s20l|\
-	clx,s20p|\
-	sl,3000-emmc)
-		# tar magic `ustar`
-		magic="$(dd if="$1" bs=1 skip=257 count=5 2>/dev/null)"
-		[ "$magic" != "ustar" ] && {
 			echo "Invalid image type."
 			return 1
 		}
@@ -245,6 +226,9 @@ platform_copy_config() {
 	acer,predator-w6d|\
 	acer,vero-w6m|\
 	arcadyan,mozart|\
+	clx,s20l|\
+	clx,s20p|\
+	cmcc,xr30-emmc|\
 	cmcc,rax3000z-emmc|\
 	cmcc,rax3000m-emmc|\
 	cetron,ct3003-emmc|\
@@ -254,8 +238,6 @@ platform_copy_config() {
 	glinet,gl-xe3000|\
 	huasifei,wh3000-emmc|\
 	jdcloud,re-cp-03|\
-	clx,s20l|\
-	clx,s20p|\
 	smartrg,sdg-8612|\
 	smartrg,sdg-8614|\
 	smartrg,sdg-8622|\
@@ -270,8 +252,7 @@ platform_copy_config() {
 	bananapi,bpi-r3-mini|\
 	bananapi,bpi-r4|\
 	bananapi,bpi-r4-poe|\
-	cmcc,xr30*|\
-	cmcc,rax3000m*|\
+	cmcc,rax3000m|\
 	cmcc,rax3000me)
 		if [ "$CI_METHOD" = "emmc" ]; then
 			emmc_copy_config
