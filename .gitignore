@@ -21,7 +21,6 @@
 /package/ext/luci-app-easym*
 /*.patch
 /llvm-bpf*
-/vermagic*
 key-build*
 private-key.pem
 public-key.pem
