@@ -19,7 +19,6 @@
 /package/prepare-files
 /package/openwrt-packages
 /package/ext/luci-app-easym*
-/kernel_version_list.json
 /*.patch
 /llvm-bpf*
 /vermagic*
