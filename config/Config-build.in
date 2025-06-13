@@ -18,7 +18,6 @@ config EXPERIMENTAL
 
 config CUSTOMIZE_THE_VERSION_NUMBER
 	bool "Customize the version number"
-	default y
 	help
 	  Customize the version number
 
