@@ -319,7 +319,7 @@ config GDB_PYTHON
 	  Enable the python bindings for GDB to allow using python in the gdb shell.
 
 config HAS_BPF_TOOLCHAIN
-	default n
+	default y if !BPF_TOOLCHAIN_NONE
 	bool
 
 config NEED_BPF_TOOLCHAIN
