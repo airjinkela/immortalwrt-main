@@ -497,3 +497,25 @@ endif
   DEVICE_COMPAT_MESSAGE := Flash layout changes require a manual reinstall using factory.bin.
 endef
 TARGET_DEVICES += xiaomi_redmi-router-ax6s
+
+define Device/ruijie-rg-ew3200gx-pro-ubootmod
+  DEVICE_VENDOR := Ruijie
+  DEVICE_MODEL := RG-EW3200GX PRO (NAND 128M)
+  DEVICE_DTS := mt7622-ruijie-rg-ew3200gx-pro-ubootmod
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-mt7915-firmware 
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  UBOOTENV_IN_UBI := 1
+  KERNEL_IN_UBI := 1
+  KERNEL := kernel-bin | gzip
+  KERNEL_INITRAMFS := kernel-bin | lzma | fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb with-initrd | pad-to 128k
+  KERNEL_INITRAMFS_SUFFIX := -recovery.itb
+  IMAGES := sysupgrade.itb
+  IMAGE/sysupgrade.itb := append-kernel | fit gzip $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb external-static-with-rootfs | append-metadata
+  ARTIFACTS := preloader.bin bl31-uboot.fip
+  ARTIFACT/preloader.bin := bl2 snand-ubi-1ddr
+  ARTIFACT/bl31-uboot.fip := bl31-uboot ruijie-rg-ew3200-pro
+endef
+TARGET_DEVICES += ruijie-rg-ew3200gx-pro-ubootmod

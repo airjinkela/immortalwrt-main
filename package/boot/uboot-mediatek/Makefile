@@ -102,6 +102,17 @@ define U-Boot/mt7622_linksys_e8450
   DEPENDS:=+trusted-firmware-a-mt7622-snand-ubi-1ddr
 endef
 
+define U-Boot/mt7622_ruijie-rg-ew3200-pro
+  NAME:=Ruijie RG-EW3200GX PRO
+  UBOOT_CONFIG:=mt7622_ruijie-rg-ew3200-pro
+  BUILD_DEVICES:=ruijie-rg-ew3200gx-pro-ubootmod
+  BUILD_SUBTARGET:=mt7622
+  UBOOT_IMAGE:=u-boot.fip
+  BL2_BOOTDEV:=snand-ubi
+  BL2_DDRBLOB:=1
+  DEPENDS:=+trusted-firmware-a-mt7622-snand-ubi-1ddr
+endef
+
 define U-Boot/mt7622_bananapi_bpi-r64-emmc
   NAME:=BananaPi R64 (eMMC)
   UBOOT_CONFIG:=mt7622_bananapi_bpi-r64-emmc
@@ -977,6 +988,7 @@ UBOOT_TARGETS := \
 	mt7622_bananapi_bpi-r64-sdmmc \
 	mt7622_bananapi_bpi-r64-snand \
 	mt7622_linksys_e8450 \
+  mt7622_ruijie-rg-ew3200-pro \
 	mt7622_rfb1 \
 	mt7622_ubnt_unifi-6-lr-v1 \
 	mt7622_ubnt_unifi-6-lr-v2 \
