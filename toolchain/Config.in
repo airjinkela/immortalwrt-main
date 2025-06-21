@@ -41,7 +41,7 @@ menuconfig TARGET_OPTIONS
 	choice BPF_TOOLCHAIN
 		prompt "BPF toolchain" if DEVEL
 		default BPF_TOOLCHAIN_PREBUILT if HAS_PREBUILT_LLVM_TOOLCHAIN
-		default BPF_TOOLCHAIN_BUILD_LLVM
+		default BPF_TOOLCHAIN_HOST
 
 		config BPF_TOOLCHAIN_NONE
 			bool "None"
@@ -52,11 +52,11 @@ menuconfig TARGET_OPTIONS
 			select USE_LLVM_PREBUILT
 
 		config BPF_TOOLCHAIN_HOST
-			select USE_LLVM_HOST
+			select USE_LLVM_HOST if NEED_BPF_TOOLCHAIN
 			bool "Use host LLVM toolchain"
 
 		config BPF_TOOLCHAIN_BUILD_LLVM
-			select USE_LLVM_BUILD if NEED_BPF_TOOLCHAIN
+			select USE_LLVM_BUILD 
 			bool "Build LLVM toolchain for eBPF"
 			help
 			  If enabled, a LLVM toolchain for building eBPF binaries will be built.
@@ -329,14 +329,11 @@ config HAS_PREBUILT_LLVM_TOOLCHAIN
 	def_bool $(shell, [ -f llvm-bpf/.llvm-version ] && echo y || echo n)
 
 config USE_LLVM_HOST
+	default y if !DEVEL && NEED_BPF_TOOLCHAIN
 	bool
 
 config USE_LLVM_PREBUILT
 	default y if !DEVEL && !BUILDBOT && HAS_PREBUILT_LLVM_TOOLCHAIN
-	bool
-
-config USE_LLVM_BUILD
-	default y if !DEVEL && NEED_BPF_TOOLCHAIN && (BUILDBOT || !HAS_PREBUILT_LLVM_TOOLCHAIN)
 	bool
 
 config USE_GLIBC
