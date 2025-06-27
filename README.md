@@ -1,6 +1,4 @@
-# 此项目为个人使用，在此遵循GPL协议开源
-
-*因为刚开始不懂git命令会有一些奇怪的push，大佬看到请轻一些喷*
+# 在此遵循GPL协议开源
 
 ## 设备支持情况
 > 可能更新不及时，请以具体情况为准
@@ -17,70 +15,18 @@
 |CMCC rax3000Z (EMMC version) | cmcc_rax3000z-emmc                  |mt7981b      |支持并正常运行        |
 |CMCC rax3000M                | cmcc_rax3000m*                      |mt7981b      |支持并正常运行        |
 |CMCC xr30 (NAND version)     | cmcc_xr30-nand                      |mt7981b      |支持并正常运行        |
+|CMCC xr30 (EMMC version)     | cmcc_xr30-emmc                      |mt7981b      |支持并正常运行        |
 |Zbtlink ZBT-Z8102AX-V2       | zbtlink_zbt-z8102ax-v2              |mt7981b      |支持并正常运行        |
 |SL 3000                      | sl_3000 \| sl_3000-emmc             |mt7981b      |支持并正常运行        |
 |Cetron CT3003 (emmc)         | cetron_ct3003-emmc                  |mt7981b      |支持并正常运行        |
 |HC HC-G80                    | hc_hc-g80                           |mt7981b      |支持并正常运行        |
+|Netcore N60 Pro (U-Boot mod) | netcore_n60-pro-mod                 |mt7986a      |支持并正常运行        |
+|Nokia EA0326GMP (U-Boot mod) | nokia_ea0326gmp-mod                 |mt7981b      |支持并正常运行        |
+|Nokia EA0326GMP (U-Boot mod 114)| nokia_ea0326gmp-mod-114          |mt7981b      |支持并正常运行        |
+|Ruijie RG-X60 Pro (U-Boot mod)| ruijie_rg-x60-pro-mod              |mt7986a      |支持并正常运行        |
+|Xiaomi AX9000 (custom U-Boot layout)| xiaomi_ax9000-stock          |ipq8072      |支持并正常运行        |
 |Linksys MR8300               | linksys_mr8300                      |qcom-ipq4019 |支持并正常运行        |
-|MobiPromo CM520-79F          | mobipromo_cm520-79f                 |qcom-ipq4019 |无法启动?            |
-
-## 编译常见变量名
-<details>
-
-> 防止自己忘了找不到
-
-```make
-#include/kernel.mk
-ifneq (,$(findstring uml,$(BOARD)))
-  LINUX_KARCH=um
-else ifneq (,$(findstring $(ARCH) , aarch64 aarch64_be ))
-  LINUX_KARCH := arm64
-else ifneq (,$(findstring $(ARCH) , arceb ))
-  LINUX_KARCH := arc
-else ifneq (,$(findstring $(ARCH) , armeb ))
-  LINUX_KARCH := arm
-else ifneq (,$(findstring $(ARCH) , loongarch64 ))
-  LINUX_KARCH := loongarch
-else ifneq (,$(findstring $(ARCH) , mipsel mips64 mips64el ))
-  LINUX_KARCH := mips
-else ifneq (,$(findstring $(ARCH) , powerpc64 ))
-  LINUX_KARCH := powerpc
-else ifneq (,$(findstring $(ARCH) , riscv64 ))
-  LINUX_KARCH := riscv
-else ifneq (,$(findstring $(ARCH) , sh2 sh3 sh4 ))
-  LINUX_KARCH := sh
-else ifneq (,$(findstring $(ARCH) , i386 x86_64 ))
-  LINUX_KARCH := x86
-else
-  LINUX_KARCH := $(ARCH)
-endif
-KERNEL_BUILD_DIR ?= $(BUILD_DIR)/linux-$(BOARD)_$(SUBTARGET)
-LINUX_DIR ?= $(KERNEL_BUILD_DIR)/linux-$(LINUX_VERSION)
-
-#include/image.mk
-DTS_DIR:=$(LINUX_DIR)/arch/$(LINUX_KARCH)/boot/dts
-KDIR=$(KERNEL_BUILD_DIR)
-
-#include/target.mk
-GENERIC_PLATFORM_DIR := $(TOPDIR)/target/linux/generic
-
-#rules.mk
-INCLUDE_DIR:=$(TOPDIR)/include
-SCRIPT_DIR:=$(TOPDIR)/scripts
-BUILD_DIR_BASE:=$(TOPDIR)/build_dir
-  GCCV:=$(call qstrip,$(CONFIG_GCC_VERSION))
-  LIBC:=$(call qstrip,$(CONFIG_LIBC))
-  REAL_GNU_TARGET_NAME=$(OPTIMIZE_FOR_CPU)-openwrt-linux$(if $(TARGET_SUFFIX),-$(TARGET_SUFFIX))
-  GNU_TARGET_NAME=$(OPTIMIZE_FOR_CPU)-openwrt-linux
-  DIR_SUFFIX:=_$(LIBC)$(if $(CONFIG_arm),_eabi)
-  BIN_DIR:=$(BIN_DIR)$(if $(CONFIG_USE_MUSL),,-$(LIBC))
-  TARGET_DIR_NAME = target-$(ARCH)$(ARCH_SUFFIX)$(DIR_SUFFIX)$(if $(BUILD_SUFFIX),_$(BUILD_SUFFIX))
-  TOOLCHAIN_DIR_NAME = toolchain-$(ARCH)$(ARCH_SUFFIX)_gcc-$(GCCV)$(DIR_SUFFIX)
-BUILD_DIR_BASE:=$(TOPDIR)/build_dir
-BUILD_DIR:=$(BUILD_DIR_BASE)/$(TARGET_DIR_NAME)
-
-```
-</details>
+|MobiPromo CM520-79F (op-boot)| mobipromo_cm520-79f-opboot          |qcom-ipq4019 |支持并正常运行        |
 
 ## 引用
 * openstick https://github.com/lkiuyu/openstick-feeds
