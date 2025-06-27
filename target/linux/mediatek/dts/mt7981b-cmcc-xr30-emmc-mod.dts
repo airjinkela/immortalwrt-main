@@ -4,7 +4,7 @@
 #include "mt7981b-cmcc-xr30.dtsi"
 
 / {
-	model = "CMCC XR30 EMMC (U-Boot mod)";
+	model = "CMCC XR30 EMMC (UBoot mod)";
 	compatible = "cmcc,xr30-emmc", "mediatek,mt7981";
 
 	chosen {

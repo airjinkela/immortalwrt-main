@@ -4,7 +4,7 @@
 #include "mt7981b-cmcc-rax3000m-mod.dtsi"
 
 / {
-	model = "CMCC RAX3000M (eMMC version)";
+	model = "CMCC RAX3000M eMMC (UBoot mod)";
 	compatible = "cmcc,rax3000m-emmc", "mediatek,mt7981";
 
 	chosen {

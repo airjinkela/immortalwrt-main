@@ -4,7 +4,7 @@
 #include "mt7981b-cmcc-rax3000m-mod.dtsi"
 
 / {
-	model = "CMCC RAX3000M (NAND version)";
+	model = "CMCC RAX3000M NAND (UBoot mod)";
 	compatible = "cmcc,rax3000m-nand", "mediatek,mt7981";
 
 	aliases {

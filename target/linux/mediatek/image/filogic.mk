@@ -2234,7 +2234,6 @@ define Device/cudy_tr3000-v1-mod
 endef
 TARGET_DEVICES += cudy_tr3000-v1-mod
 
-
 define Device/cmcc_rax3000z-emmc
   DEVICE_VENDOR := CMCC
   DEVICE_MODEL := RAX3000Z (eMMC version)
@@ -2386,7 +2385,7 @@ TARGET_DEVICES += cetron_ct3003-emmc
 
 define Device/clx_s20l
   DEVICE_VENDOR := CLX
-  DEVICE_MODEL := s20l (eMMC)
+  DEVICE_MODEL := s20l (eMMC version)
   DEVICE_DTS := mt7986a-clx-s20l
   DEVICE_DTS_DIR := ../dts
   DEVICE_PACKAGES := kmod-mt7915e kmod-mt7986-firmware mt7986-wo-firmware kmod-usb3 \
@@ -2395,6 +2394,18 @@ define Device/clx_s20l
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += clx_s20l
+
+define Device/clx_s20p
+  DEVICE_VENDOR := CLX
+  DEVICE_MODEL := s20p (eMMC version)
+  DEVICE_DTS := mt7986a-clx-s20p
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7986-firmware mt7986-wo-firmware kmod-usb3 \
+	automount e2fsprogs f2fsck mkf2fs
+  KERNEL := kernel-bin | lzma | fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += clx_s20p
 
 define Device/yvr_x6
   DEVICE_VENDOR := DaZoo
@@ -2410,18 +2421,6 @@ define Device/yvr_x6
 endef
 TARGET_DEVICES += yvr_x6
 
-define Device/clx_s20p
-  DEVICE_VENDOR := CLX
-  DEVICE_MODEL := s20p (eMMC)
-  DEVICE_DTS := mt7986a-clx-s20p
-  DEVICE_DTS_DIR := ../dts
-  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7986-firmware mt7986-wo-firmware kmod-usb3 \
-	automount e2fsprogs f2fsck mkf2fs
-  KERNEL := kernel-bin | lzma | fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
-  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
-endef
-TARGET_DEVICES += clx_s20p
-
 define Device/ruijie_rg-x60-pro-mod
   DEVICE_VENDOR := Ruijie
   DEVICE_MODEL := RG-X60 Pro
@@ -2435,7 +2434,8 @@ TARGET_DEVICES += ruijie_rg-x60-pro-mod
 
 define Device/netcore_n60-pro-mod
   DEVICE_VENDOR := Netcore
-  DEVICE_MODEL := N60 Pro (U-Boot mod)
+  DEVICE_MODEL := N60 Pro
+  DEVICE_VARIANT := (U-Boot mod)
   DEVICE_DTS := mt7986a-netcore-n60-pro-mod
   DEVICE_DTS_DIR := ../dts
   KERNEL_IN_UBI := 1
@@ -2446,7 +2446,8 @@ TARGET_DEVICES += netcore_n60-pro-mod
 
 define Device/nokia_ea0326gmp-mod
   DEVICE_VENDOR := Nokia
-  DEVICE_MODEL := EA0326GMP (U-Boot mod)
+  DEVICE_MODEL := EA0326GMP
+  DEVICE_VARIANT := (U-Boot mod)
   DEVICE_DTS := mt7981b-nokia-ea0326gmp-mod
   DEVICE_DTS_DIR := ../dts
   DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware
@@ -2460,7 +2461,8 @@ TARGET_DEVICES += nokia_ea0326gmp-mod
 
 define Device/nokia_ea0326gmp-mod-114
   DEVICE_VENDOR := Nokia
-  DEVICE_MODEL := EA0326GMP (U-Boot mod 114)
+  DEVICE_MODEL := EA0326GMP
+  DEVICE_VARIANT := (U-Boot mod 114)
   DEVICE_DTS := mt7981b-nokia-ea0326gmp-mod-114
   DEVICE_DTS_DIR := ../dts
   DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware

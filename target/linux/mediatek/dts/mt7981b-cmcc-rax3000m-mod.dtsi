@@ -7,7 +7,7 @@
 #include "mt7981b-cmcc-rax3000m.dts"
 
 / {
-	model = "CMCC RAX3000M";
+	model = "CMCC RAX3000M (UBoot mod)";
 	compatible = "cmcc,rax3000m", "mediatek,mt7981";
 
 };

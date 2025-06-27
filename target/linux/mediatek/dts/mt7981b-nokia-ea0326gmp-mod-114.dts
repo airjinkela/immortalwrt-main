@@ -5,7 +5,7 @@
 #include "mt7981b-nokia-ea0326gmp.dts"
 
 / {
-	model = "Nokia EA0326GMP";
+	model = "Nokia EA0326GMP (UBoot mod 114)";
 	compatible = "nokia,ea0326gmp-mod-114", "mediatek,mt7981";
 	chosen {
 		/delete-property/ bootargs;

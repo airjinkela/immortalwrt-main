@@ -4,7 +4,7 @@
 #include "mt7981b-cudy-tr3000-v1.dts"
 
 / {
-	model = "Cudy TR3000 (U-Boot mod)";
+	model = "Cudy TR3000 (UBoot mod)";
 	compatible = "cudy,tr3000-v1-mod", "mediatek,mt7981";
 };
 

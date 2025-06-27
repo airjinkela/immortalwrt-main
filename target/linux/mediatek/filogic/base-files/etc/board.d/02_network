@@ -9,7 +9,8 @@ mediatek_setup_interfaces()
 
 	case $board in
 	abt,asr3000|\
-	cmcc,xr30*|\
+	cmcc,xr30-nand|\
+	cmcc,xr30-emmc|\
 	cmcc,rax3000m*|\
 	cmcc,rax3000me|\
 	h3c,magic-nx30-pro|\
@@ -60,7 +61,9 @@ mediatek_setup_interfaces()
 	mediatek,mt7981-rfb|\
 	netcore,n60|\
 	netcore,n60-pro|\
+	netcore,n60-pro-mod|\
 	ruijie,rg-x60-pro|\
+	ruijie,rg-x60-pro-mod|\
 	unielec,u7981-01*|\
 	zbtlink,zbt-z8102ax|\
 	zbtlink,zbt-z8102ax-v2|\
@@ -215,7 +218,8 @@ mediatek_setup_macs()
 		wan_mac=$(macaddr_add "$lan_mac" 1)
 		label_mac=$wan_mac
 		;;
-	ruijie,rg-x60-pro)
+	ruijie,rg-x60-pro|\
+	ruijie,rg-x60-pro-mod)
 		label_mac=$(mtd_get_mac_ascii product_info ethaddr)
 		wan_mac=$label_mac
 		lan_mac=$(macaddr_add "$label_mac" 1)

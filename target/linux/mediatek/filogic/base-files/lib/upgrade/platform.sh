@@ -73,7 +73,6 @@ platform_do_upgrade() {
 	bananapi,bpi-r4-poe|\
 	cetron,ct3003-ubootmod|\
 	cmcc,a10|\
-	cmcc,xr30*|\
 	cmcc,rax3000m-nand|\
 	cmcc,a10-ubootmod|\
 	cmcc,rax3000m|\
@@ -113,6 +112,7 @@ platform_do_upgrade() {
 	arcadyan,mozart|\
 	clx,s20p|\
 	clx,s20l|\
+	cmcc,xr30-emmc|\
 	glinet,gl-mt2500|\
 	glinet,gl-mt6000|\
 	glinet,gl-x3000|\
