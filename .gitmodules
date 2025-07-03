@@ -6,10 +6,6 @@
 	path = package/ext/helloworld
 	url = https://gitee.com/airjinkela/helloword-package.git
 	branch = master
-[submodule "package/ext/small"]
-	path = package/ext/small
-	url = https://gitee.com/airjinkela/small.git
-	branch = master
 [submodule "package/ext/modem_feeds"]
 	path = package/ext/modem_feeds
 	url = https://github.com/FUjr/modem_feeds.git
@@ -24,5 +20,5 @@
 	branch = master
 [submodule "package/ext/third"]
 	path = package/ext/third
-	url = https://gitee.com/airjinkela/third.git
+	url = https://github.com/airjinkela/third-package.git
 	branch = master
