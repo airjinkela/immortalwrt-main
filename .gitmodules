@@ -10,14 +10,6 @@
 	path = package/ext/modem_feeds
 	url = https://github.com/FUjr/modem_feeds.git
 	branch = main
-[submodule "package/ext/UA3F"]
-	path = package/ext/UA3F
-	url = https://github.com/SunBK201/UA3F.git
-	branch = master
-[submodule "package/ext/rkp-ipid"]
-	path = package/ext/rkp-ipid
-	url = https://github.com/CHN-beta/rkp-ipid
-	branch = master
 [submodule "package/ext/third"]
 	path = package/ext/third
 	url = https://github.com/airjinkela/third-package.git
