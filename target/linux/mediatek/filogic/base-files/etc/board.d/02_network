@@ -107,7 +107,10 @@ mediatek_setup_interfaces()
 		;;
 	clx,s20l)
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4" wan
-	;;
+		;;
+	ruijie,rg-be72-pro)
+		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4" eth1
+		;;
 	cudy,m3000-v1|\
 	cudy,tr3000-v1|\
 	cudy,tr3000-v1-mod|\
@@ -218,6 +221,11 @@ mediatek_setup_macs()
 		lan_mac=$(mtd_get_mac_ascii factory lanMac)
 		wan_mac=$(macaddr_add "$lan_mac" 1)
 		label_mac=$wan_mac
+		;;
+	ruijie,rg-be72-pro)
+		label_mac=$(mtd_get_mac_ascii product_info ethaddr)
+		lan_mac=$label_mac
+		wan_mac=$(macaddr_add "$label_mac" 1)
 		;;
 	ruijie,rg-x60-pro|\
 	ruijie,rg-x60-pro-mod)
