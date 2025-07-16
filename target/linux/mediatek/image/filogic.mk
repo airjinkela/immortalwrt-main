@@ -2506,6 +2506,7 @@ define Device/nradio_c8-660
   DEVICE_VENDOR := NRadio
   DEVICE_MODEL := C8-660
   DEVICE_DTS := mt7981b-nradio-c8-660
+  DEVICE_DTS_DIR := ../dts
   IMAGE_SIZE := 131072k
   KERNEL_IN_UBI := 1
   DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware \
