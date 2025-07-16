@@ -39,9 +39,29 @@
 		};
 	};
 
+	fan: pwm-fan {
+		compatible = "pwm-fan";
+		#cooling-cells = <2>;
+		pwms = <&pwm 0 40000 0>;		
+		cooling-levels = <127 166 204 255>;
+		status = "okay";
+	};
+
 	gpio-export {
 		compatible = "gpio-export";
 		#size-cells = <0>;
+
+		fanpower {
+			gpio-export,name = "fan-hw";
+			gpio-export,output = <0>;
+			gpios = <&pio 27 GPIO_ACTIVE_HIGH>;
+		};
+
+		fanfg {
+			gpio-export,name = "fan-fg";
+			gpio-export,output = <1>;
+			gpios = <&pio 28 GPIO_ACTIVE_HIGH>;
+		};
 
 		cpepower {
 			gpio-export,name = "cpe-pwr";
@@ -85,6 +105,12 @@
 			gpios = <&pio 13 GPIO_ACTIVE_LOW>;
 		};
 	};
+};
+
+&pwm {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pwm_pins>;
+	status = "okay";
 };
 
 &uart0 {
@@ -245,6 +271,14 @@
 			groups = "emmc_45";
 		};
 	};
+
+	pwm_pins: pwm-pins {
+		mux {
+			function = "pwm";
+			groups = "pwm0_0";
+		};
+	};
+	
 };
 
 &usb_phy {
