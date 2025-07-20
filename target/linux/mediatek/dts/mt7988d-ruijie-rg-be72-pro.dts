@@ -72,7 +72,7 @@
 
 		led_status_red_atm: led-0 {
 			color = <LED_COLOR_ID_RED>;
-			label = "led_sys_r";
+			label = "led_sys_red";
 			function = LED_FUNCTION_STATUS;
 			pwms = <&pwm 5 10000>;
 			active-low;
@@ -80,7 +80,7 @@
 
 		led_status_green_atm: led-1 {
 			color = <LED_COLOR_ID_GREEN>;
-			label = "led_sys_g";
+			label = "led_sys_green";
 			function = LED_FUNCTION_STATUS;
 			pwms = <&pwm 6 10000>;
 			active-low;
@@ -88,7 +88,7 @@
 
 		led_status_blue_atm: led-2 {
 			color = <LED_COLOR_ID_BLUE>;
-			label = "led_sys_b";
+			label = "led_sys_blue";
 			function = LED_FUNCTION_STATUS;
 			pwms = <&pwm 7 10000>;
 			active-low;
@@ -96,7 +96,7 @@
 
 		led_status_red: led-3 {
 			color = <LED_COLOR_ID_BLUE>;
-			label = "led_b";
+			label = "led_red";
 			function = LED_FUNCTION_STATUS;
 			pwms = <&pwm 2 10000>;
 			active-low;
@@ -104,7 +104,7 @@
 
 		led_status_green: led-4 {
 			color = <LED_COLOR_ID_GREEN>;
-			label = "led_g";
+			label = "led_green";
 			function = LED_FUNCTION_STATUS;
 			pwms = <&pwm 4 10000>;
 			active-low;
@@ -177,7 +177,8 @@
 };
 
 &gmac2 {
-	phy-mode = "10gbase-kr";
+	phy-mode = "10gbase-r";
+	phy-connection-type = "10gbase-r";
 	status = "okay";
 	fixed-link {
 		speed = <10000>;
@@ -318,19 +319,7 @@
 	pwm_led_pins: pwm-led-pins {
 		mux {
 			function = "pwm";
-			groups = "pwm2", "pwm2_0", "pwm4", "pwm4_0", "pwm5", "pwm5_0", "pwm6", "pwm6_0", "pwm7", "pwm7_0";
-		};
-	};
-
-	mdio0_pins: mdio0-pins {
-		mux {
-			function = "eth";
-			groups = "mdc_mdio0";
-		};
-
-		conf {
-			groups = "mdc_mdio0";
-			drive-strength = <MTK_DRIVE_8mA>;
+			groups = "pwm2_0", "pwm4_0", "pwm5_0", "pwm6_0", "pwm7_0";
 		};
 	};
 
@@ -338,13 +327,6 @@
 		mux {
 			function = "pcie";
 			groups = "pcie_2l_0_pereset", "pcie_clk_req_n0_0";
-		};
-	};
-
-	spi0_flash_pins: spi0-flash-pins {
-		mux {
-			function = "spi";
-			groups = "spi0", "spi0_wp_hold";
 		};
 	};
 };
