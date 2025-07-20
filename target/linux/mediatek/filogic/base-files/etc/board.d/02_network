@@ -110,6 +110,9 @@ mediatek_setup_interfaces()
 		;;
 	ruijie,rg-be72-pro)
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4" eth1
+		ucidef_add_switch "switch0" \
+					"0@eth2" "1:lan" "2:lan" "3:lan" "4:lan"
+
 		;;
 	cudy,m3000-v1|\
 	cudy,tr3000-v1|\

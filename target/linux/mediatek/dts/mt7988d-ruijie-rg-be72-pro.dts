@@ -177,7 +177,8 @@
 };
 
 &gmac2 {
-	phy-mode = "10gbase-kr";
+	phy-mode = "10gbase-r";
+	phy-connection-type = "10gbase-r";
 	status = "okay";
 	fixed-link {
 		speed = <10000>;
