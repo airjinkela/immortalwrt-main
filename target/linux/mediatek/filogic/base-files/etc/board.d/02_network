@@ -62,6 +62,7 @@ mediatek_setup_interfaces()
 	netcore,n60|\
 	netcore,n60-pro|\
 	netcore,n60-pro-mod|\
+	netcore,n60-pro-mod-512m|\
 	ruijie,rg-x60-pro|\
 	ruijie,rg-x60-pro-mod|\
 	unielec,u7981-01*|\

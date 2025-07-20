@@ -2444,6 +2444,18 @@ define Device/netcore_n60-pro-mod
 endef
 TARGET_DEVICES += netcore_n60-pro-mod
 
+define Device/netcore_n60-pro-mod-512m
+  DEVICE_VENDOR := Netcore
+  DEVICE_MODEL := N60 Pro
+  DEVICE_VARIANT := (U-Boot mod 512M)
+  DEVICE_DTS := mt7986a-netcore-n60-pro-mod-512m
+  DEVICE_DTS_DIR := ../dts
+  KERNEL_IN_UBI := 1
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7986-firmware mt7986-wo-firmware kmod-usb3 automount
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += netcore_n60-pro-mod-512m
+
 define Device/nokia_ea0326gmp-mod
   DEVICE_VENDOR := Nokia
   DEVICE_MODEL := EA0326GMP
