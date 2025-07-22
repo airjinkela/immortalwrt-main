@@ -781,6 +781,23 @@ define Device/cudy_re3000-v1
 endef
 TARGET_DEVICES += cudy_re3000-v1
 
+define Device/cudy_tr3000-256mb-v1
+  DEVICE_VENDOR := Cudy
+  DEVICE_MODEL := TR3000
+  DEVICE_VARIANT := 256mb v1
+  DEVICE_DTS := mt7981b-cudy-tr3000-256mb-v1
+  DEVICE_DTS_DIR := ../dts
+  SUPPORTED_DEVICES += R103
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  IMAGE_SIZE := 235520k
+  KERNEL_IN_UBI := 1
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+  DEVICE_PACKAGES := kmod-usb3 kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware automount
+endef
+TARGET_DEVICES += cudy_tr3000-256mb-v1
+
 define Device/cudy_tr3000-v1
   DEVICE_VENDOR := Cudy
   DEVICE_MODEL := TR3000
@@ -949,7 +966,7 @@ define Device/gatonetworks_gdsp
   IMAGE_SIZE := 32768k
   DEVICE_PACKAGES := fitblk kmod-mt7915e kmod-mt7981-firmware \
     kmod-usb-net-qmi-wwan kmod-usb-serial-option kmod-usb3 \
-    mt7981-wo-firmware -kmod-phy-aquantia
+    mt7981-wo-firmware -kmod-phy-aquantia automount
   ARTIFACTS := preloader.bin bl31-uboot.fip
   ARTIFACT/preloader.bin := mt7981-bl2 nor-ddr3
   ARTIFACT/bl31-uboot.fip := mt7981-bl31-uboot gatonetworks_gdsp
@@ -963,15 +980,31 @@ TARGET_DEVICES += gatonetworks_gdsp
 define Device/glinet_gl-mt2500
   DEVICE_VENDOR := GL.iNet
   DEVICE_MODEL := GL-MT2500
-  DEVICE_DTS := mt7981b-glinet-gl-mt2500
+  DEVICE_VARIANT := MaxLinear PHY
+  DEVICE_DTS := mt7981b-glinet-gl-mt2500-v1
   DEVICE_DTS_DIR := ../dts
   DEVICE_DTS_LOADADDR := 0x47000000
-  DEVICE_PACKAGES :=-wpad-openssl f2fsck mkf2fs kmod-usb3 automount
-  SUPPORTED_DEVICES += glinet,mt2500-emmc
+  DEVICE_PACKAGES := -wpad-openssl e2fsprogs f2fsck mkf2fs kmod-usb3 automount
+  SUPPORTED_DEVICES += glinet,mt2500-emmc glinet,gl-mt2500-airoha
   IMAGES := sysupgrade.bin
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-gl-metadata
 endef
 TARGET_DEVICES += glinet_gl-mt2500
+
+define Device/glinet_gl-mt2500-airoha
+  DEVICE_VENDOR := GL.iNet
+  DEVICE_MODEL := GL-MT2500
+  DEVICE_VARIANT := Airoha PHY
+  DEVICE_DTS := mt7981b-glinet-gl-mt2500-v2
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_DTS_LOADADDR := 0x47000000
+  DEVICE_PACKAGES := -wpad-openssl e2fsprogs f2fsck mkf2fs kmod-usb3 \
+	kmod-phy-airoha-en8811h airoha-en8811h-firmware automount
+  SUPPORTED_DEVICES += glinet,mt2500-emmc glinet,gl-mt2500
+  IMAGES := sysupgrade.bin
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-gl-metadata
+endef
+TARGET_DEVICES += glinet_gl-mt2500-airoha
 
 define Device/glinet_gl-mt3000
   DEVICE_VENDOR := GL.iNet
@@ -1125,6 +1158,17 @@ define Device/imou_lc-hx3001
   ARTIFACT/bl31-uboot.fip := mt7981-bl31-uboot imou_lc-hx3001
 endef
 TARGET_DEVICES += imou_lc-hx3001
+
+define Device/iptime_ax3000sm
+  DEVICE_VENDOR := ipTIME
+  DEVICE_MODEL := AX3000SM
+  DEVICE_DTS := mt7981b-iptime-ax3000sm
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+  SUPPORTED_DEVICES += mediatek,mt7981-spim-snand-rfb
+endef
+TARGET_DEVICES += iptime_ax3000sm
 
 define Device/jcg_q30-pro
   DEVICE_VENDOR := JCG
@@ -1316,7 +1360,7 @@ define Device/mediatek_mt7981-rfb
 	mt7981-rfb-mxl-2p5g-phy-eth1 \
 	mt7981-rfb-mxl-2p5g-phy-swp5
   DEVICE_DTS_DIR := $(DTS_DIR)/
-  DEVICE_DTC_FLAGS := --pad 4096
+  
   DEVICE_DTS_LOADADDR := 0x43f00000
   DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware kmod-usb3 e2fsprogs f2fsck mkf2fs mt7981-wo-firmware
   KERNEL_LOADADDR := 0x44000000
@@ -1794,7 +1838,8 @@ define Device/tplink_archer-ax80-v1
   DEVICE_MODEL := Archer AX80V1
   DEVICE_DTS := mt7986a-tplink-archer-ax80-v1
   DEVICE_DTS_DIR := ../dts
-  DEVICE_PACKAGES := kmod-leds-lp5523 kmod-usb3 kmod-mt7915e kmod-mt7986-firmware mt7986-wo-firmware
+  DEVICE_PACKAGES := kmod-leds-lp5523 kmod-usb3 kmod-mt7915e \
+	kmod-mt7986-firmware mt7986-wo-firmware automount
   UBINIZE_OPTS := -E 5
   BLOCKSIZE := 128k
   PAGESIZE := 2048
@@ -1816,6 +1861,58 @@ define Device/tplink_re6000xd
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += tplink_re6000xd
+
+define Device/tplink_tl-7dr-common
+  DEVICE_VENDOR := TP-Link
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_DTS_LOADADDR := 0x45f00000
+  DEVICE_PACKAGES := mt7988-2p5g-phy-firmware kmod-mt7992-firmware mt7988-wo-firmware
+  KERNEL_LOADADDR := 0x46000000
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  KERNEL_IN_UBI := 1
+  UBOOTENV_IN_UBI := 1
+  IMAGES := sysupgrade.itb
+  KERNEL_INITRAMFS_SUFFIX := -recovery.itb
+  KERNEL := kernel-bin | gzip
+  KERNEL_INITRAMFS := kernel-bin | lzma | \
+	fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb with-initrd | pad-to 64k
+  IMAGE/sysupgrade.itb := append-kernel | \
+	fit gzip $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb external-with-rootfs | append-metadata
+  ARTIFACTS := preloader.bin bl31-uboot.fip
+endef
+
+define Device/tplink_tl-7dr7230-v1
+  DEVICE_MODEL := TL-7DR7230
+  DEVICE_VARIANT := v1
+  DEVICE_DTS := mt7988d-tplink-tl-7dr7230-v1
+  ARTIFACT/preloader.bin := mt7988-bl2 spim-nand-ddr4
+  ARTIFACT/bl31-uboot.fip := mt7988-bl31-uboot tplink_tl-7dr7230-v1
+  $(call Device/tplink_tl-7dr-common)
+endef
+TARGET_DEVICES += tplink_tl-7dr7230-v1
+
+define Device/tplink_tl-7dr7230-v2
+  DEVICE_MODEL := TL-7DR7230
+  DEVICE_VARIANT := v2
+  DEVICE_DTS := mt7988d-tplink-tl-7dr7230-v2
+  ARTIFACT/preloader.bin := mt7988-bl2 spim-nand-ddr3
+  ARTIFACT/bl31-uboot.fip := mt7988-bl31-uboot tplink_tl-7dr7230-v2
+  $(call Device/tplink_tl-7dr-common)
+endef
+TARGET_DEVICES += tplink_tl-7dr7230-v2
+
+define Device/tplink_tl-7dr7250-v1
+  DEVICE_MODEL := TL-7DR7250
+  DEVICE_VARIANT := v1
+  DEVICE_DTS := mt7988d-tplink-tl-7dr7250-v1
+  ARTIFACT/preloader.bin := mt7988-bl2 spim-nand-ddr4
+  ARTIFACT/bl31-uboot.fip := mt7988-bl31-uboot tplink_tl-7dr7250-v1
+  $(call Device/tplink_tl-7dr-common)
+  DEVICE_PACKAGES += kmod-phy-airoha-en8811h airoha-en8811h-firmware
+endef
+TARGET_DEVICES += tplink_tl-7dr7250-v1
 
 define Device/tplink_tl-xdr-common
   DEVICE_VENDOR := TP-Link
@@ -2108,6 +2205,23 @@ define Device/zbtlink_zbt-z8102ax
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += zbtlink_zbt-z8102ax
+
+define Device/zbtlink_zbt-z8102ax-v2
+  DEVICE_VENDOR := Zbtlink
+  DEVICE_MODEL := ZBT-Z8102AX-V2
+  DEVICE_DTS := mt7981b-zbtlink-zbt-z8102ax-v2
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware kmod-usb3 kmod-usb-net-qmi-wwan kmod-usb-serial-option
+  KERNEL_IN_UBI := 1
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  IMAGE_SIZE := 65536k
+  IMAGES += factory.bin
+  IMAGE/factory.bin := append-ubi | check-size $$(IMAGE_SIZE)
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += zbtlink_zbt-z8102ax-v2
 
 define Device/zbtlink_zbt-z8103ax
   DEVICE_VENDOR := Zbtlink

@@ -10,6 +10,7 @@ platform_do_upgrade() {
 	linksys,e8450-ubi|\
 	ruijie,rg-ew3200gx-pro-ubootmod|\
 	tplink,tl-xdr3230-v1|\
+	tplink,tl-xdr3250-v1|\
 	ubnt,unifi-6-lr-v1-ubootmod|\
 	ubnt,unifi-6-lr-v2-ubootmod|\
 	ubnt,unifi-6-lr-v3-ubootmod|\
