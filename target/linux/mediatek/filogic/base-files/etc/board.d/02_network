@@ -46,7 +46,8 @@ mediatek_setup_interfaces()
 	cmcc,a10-ubootmod|\
 	confiabits,mt7981|\
 	cudy,wr3000-v1|\
-	sl,3000*|\
+	sl,3000|\
+	sl,3000-emmc|\
 	jcg,q30-pro|\
 	keenetic,kn3811|\
 	livinet,zr-3020|\
@@ -238,7 +239,7 @@ mediatek_setup_macs()
 		label_mac=$lan_mac
 		;;
 	sl,3000)
-		lan_mac=$(mtd_get_mac_binary Factory 0x04)
+		lan_mac=$(mtd_get_mac_binary factory 0x04)
 		wan_mac=$(macaddr_add $lan_mac -2)
 		label_mac=$wan_mac
 		;;

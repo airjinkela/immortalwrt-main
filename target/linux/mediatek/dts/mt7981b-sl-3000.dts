@@ -15,13 +15,11 @@
 	compatible = "sl,3000", "mediatek,mt7981";
 	
 	chosen {
-		bootargs = "console=ttyS0,115200n1 loglevel=8 \
-				earlycon=uart8250,mmio32,0x11002000 \
-				root=PARTLABEL=rootfs rootwait rootfstype=squashfs,f2fs";
+        stdout-path = "serial0:115200n8";
 	};
 
     memory {
-		reg = <0x00 0x40000000 0x00 0x20000000>;
+		reg = <0 0x40000000 0 0x20000000>;
 	};
 
     aliases {
@@ -29,6 +27,7 @@
 		led-failsafe = &red_led;
 		led-running = &green_led;
 		led-upgrade = &blue_led;
+        serial0 = &uart0;
 	};
 
 	gpio-leds {
@@ -62,8 +61,7 @@
 		mesh {
 			label = "mesh";
 			gpios = <&pio 0 GPIO_ACTIVE_LOW>;
-			linux,code = <BTN_9>;
-            linux,input-type = <EV_SW>;
+			linux,code = <KEY_WPS_BUTTON>;
 		};
 	};
 };
@@ -102,9 +100,26 @@
 			label = "Config";
 			reg = <0x100000 0x080000>;
 		};
-		partition@180000 {
-			label = "Factory";
+		factory: partition@180000 {
+			label = "factory";
 			reg = <0x180000 0x0200000>;
+			read-only;
+
+			nvmem-layout {
+				compatible = "fixed-layout";
+				#address-cells = <1>;
+				#size-cells = <1>;
+
+				eeprom_factory_0: eeprom@0 {
+					reg = <0x0 0x1000>;
+				};
+				
+				macaddr_factory_4: macaddr@4 {
+					compatible = "mac-base";
+					reg = <0x4 0x6>;
+					#nvmem-cell-cells = <1>;
+				};
+			};
 		};
 		partition@380000 {
 			label = "FIP";
@@ -149,20 +164,6 @@
 			pins = "SPI2_CLK", "SPI2_MOSI", "SPI2_MISO";
 			drive-strength = <MTK_DRIVE_8mA>;
 			bias-pull-down = <MTK_PUPD_SET_R1R0_11>;
-		};
-	};
-	
-	emmc_pins_default: mmc0-pins-default {
-		mux {
-			function = "flash";
-			groups = "emmc_45";
-		};
-	};
-
-	emmc_pins_uhs: mmc0-pins-uhs {
-		mux {
-			function = "flash";
-			groups = "emmc_45";
 		};
 	};
 };
@@ -243,20 +244,6 @@
     };
 };
 
-&mmc0 {
-    bus-width = <8>;
-    cap-mmc-highspeed;
-    max-frequency = <52000000>;
-    no-sd;
-    no-sdio;
-    non-removable;
-    pinctrl-names = "default", "state_uhs";
-	pinctrl-0 = <&emmc_pins_default>;
-	pinctrl-1 = <&emmc_pins_uhs>;
-    vmmc-supply = <&reg_3p3v>;
-    status = "okay";
-};
-
 &uart0 {
 	status = "okay";
 };
@@ -265,10 +252,20 @@
 	status = "okay";
 };
 
-&wed {
-	dy_txbm_enable = "true";
-	dy_txbm_budget = <8>;
-	txbm_init_sz = <8>;
-	txbm_max_sz = <32>;
+&wifi {
+	nvmem-cells = <&eeprom_factory_0>;
+	nvmem-cell-names = "eeprom";
 	status = "okay";
+
+	band0: band@0 {
+		reg = <0>;
+		nvmem-cells = <&macaddr_factory_4 1>;
+		nvmem-cell-names = "mac-address";
+	};
+
+	band1: band@1 {
+		reg = <1>;
+		nvmem-cells = <&macaddr_factory_4 2>;
+		nvmem-cell-names = "mac-address";
+	};
 };
