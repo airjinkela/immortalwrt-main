@@ -2598,3 +2598,15 @@ define Device/xiaomi_redmi-router-ax6000-mod
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += xiaomi_redmi-router-ax6000-mod
+
+define Device/qihoo_360t7-mod
+  DEVICE_VENDOR := Qihoo
+  DEVICE_MODEL := 360T7
+  DEVICE_VARIANT := (U-Boot mod)
+  DEVICE_DTS := mt7981b-qihoo-360t7-mod
+  DEVICE_DTS_DIR := ../dts
+  KERNEL_IN_UBI := 1
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += qihoo_360t7-mod

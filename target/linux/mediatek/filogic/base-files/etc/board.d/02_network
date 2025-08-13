@@ -53,6 +53,7 @@ mediatek_setup_interfaces()
 	livinet,zr-3020|\
 	livinet,zr-3020-ubootmod|\
 	qihoo,360t7|\
+	qihoo,360t7-mod|\
 	routerich,ax3000|\
 	routerich,ax3000-ubootmod|\
 	tplink,tl-7dr7250-v1)
@@ -223,7 +224,8 @@ mediatek_setup_macs()
 		lan_mac=$(mtd_get_mac_ascii u-boot-env mac)
 		label_mac=$lan_mac
 		;;
-	qihoo,360t7)
+	qihoo,360t7|\
+	qihoo,360t7-mod)
 		lan_mac=$(mtd_get_mac_ascii factory lanMac)
 		wan_mac=$(macaddr_add "$lan_mac" 1)
 		label_mac=$wan_mac
