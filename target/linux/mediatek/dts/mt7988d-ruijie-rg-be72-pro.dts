@@ -112,16 +112,14 @@
 		regulator-always-on;
 	};
 
-	rtk-gsw@1 {
+	rtl837x-gsw@1 {
 		compatible = "realtek,rtl837x";
-		reg = <0x1d>;
-		smi-addr = <0x1d>;
-		cpu-port = <0x00>;
-		serdes-mode = "10g-r";
-		mediatek,mdio = <&mdio_bus>;
-		mediatek,reset-pin = <&pio 3 GPIO_ACTIVE_HIGH>;
-		irq-gpios = <&pio 2 GPIO_ACTIVE_HIGH>;
-		ethernet = <&gmac2>;
+		rtl837x,mdio = <&mdio_bus>;
+		rtl837x,reset-pin = <&pio 3 GPIO_ACTIVE_HIGH>;
+		rtl837x,cpu-port = <0x00>;
+		rtl837x,smi-addr = <0x1d>;
+		rtl837x,sds0mode = "10g-kr";
+		// ethernet = <&gmac2>;
 	};
 };
 
