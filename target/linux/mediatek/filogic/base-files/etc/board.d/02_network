@@ -101,6 +101,12 @@ mediatek_setup_interfaces()
 	comfast,cf-e393ax)
 		ucidef_set_interfaces_lan_wan "lan1" eth1
 		;;
+	ruijie,rg-be68-ultra|\
+	ruijie,rg-be68-ultra-mod)
+		ucidef_set_interfaces_lan_wan "eth2.2" eth2.1
+		ucidef_add_switch "switch0" \
+					"0@eth2" "1:wan" "2:lan" "3:lan" "4:lan"
+		;;
 	cudy,ap3000outdoor-v1|\
 	cudy,ap3000-v1|\
 	cudy,re3000-v1|\
@@ -248,6 +254,12 @@ mediatek_setup_macs()
 		label_mac=$(mtd_get_mac_ascii product_info ethaddr)
 		wan_mac=$label_mac
 		lan_mac=$(macaddr_add "$label_mac" 1)
+		;;
+	ruijie,rg-be68-ultra|\
+	ruijie,rg-be68-ultra-mod)
+		label_mac=$(mtd_get_mac_ascii product_info ethaddr)
+		lan_mac=$label_mac
+		wan_mac=$(macaddr_add "$label_mac" 1)
 		;;
 	yvr,x6)
 		wan_mac=$(mtd_get_mac_ascii Factory_info MAC)
