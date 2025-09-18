@@ -137,6 +137,16 @@
 	status = "okay";
 };
 
+&gmac0 {
+	phy-mode = "";
+	status = "okay";
+};
+
+&gmac1 {
+	phy-mode = "";
+	status = "okay";
+};
+
 &gmac2 {
 	phy-mode = "10gbase-r";
 	phy-connection-type = "10gbase-r";
@@ -147,6 +157,10 @@
 		pause;
 		asym-pause;
 	};
+};
+
+&switch {
+	status = "disabled";
 };
 
 &i2c0 {
