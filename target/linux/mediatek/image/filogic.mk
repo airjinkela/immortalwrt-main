@@ -2661,3 +2661,18 @@ define Device/qihoo_360t7-mod
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += qihoo_360t7-mod
+
+define Device/zhao_7981r128-mod
+  DEVICE_VENDOR := Zhao
+  DEVICE_MODEL := 7981R128
+  DEVICE_VARIANT := (U-Boot mod)
+  DEVICE_DTS := mt7981b-zhao-7981
+  DEVICE_DTS_DIR := ../dts
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  KERNEL_IN_UBI := 1
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+  DEVICE_PACKAGES := kmod-mt7915e kmod-usb3 kmod-mt7981-firmware mt7981-wo-firmware kmod-i2c-gpio kmod-sfp
+endef
+TARGET_DEVICES += zhao_7981r128-mod
