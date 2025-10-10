@@ -7,11 +7,9 @@ Subject: [PATCH] Add EM05-CE serial driver
  drivers/usb/serial/option.c | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/drivers/usb/serial/option.c b/drivers/usb/serial/option.c
-index 45dcfaadaf98..386d62f74f1a 100644
 --- a/drivers/usb/serial/option.c
 +++ b/drivers/usb/serial/option.c
-@@ -266,6 +266,7 @@ static void option_instat_callback(struct urb *urb);
+@@ -276,6 +276,7 @@ static void option_instat_callback(struc
  #define QUECTEL_PRODUCT_EM05CN_SG		0x0310
  #define QUECTEL_PRODUCT_EM05G_SG		0x0311
  #define QUECTEL_PRODUCT_EM05CN			0x0312
@@ -19,7 +17,7 @@ index 45dcfaadaf98..386d62f74f1a 100644
  #define QUECTEL_PRODUCT_EM05G_GR		0x0313
  #define QUECTEL_PRODUCT_EM05G_RS		0x0314
  #define QUECTEL_PRODUCT_EM12			0x0512
-@@ -1190,6 +1191,8 @@ static const struct usb_device_id option_ids[] = {
+@@ -1215,6 +1216,8 @@ static const struct usb_device_id option
  	{ USB_DEVICE_AND_INTERFACE_INFO(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_EP06, 0xff, 0, 0) },
  	{ USB_DEVICE_INTERFACE_CLASS(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_EM05CN, 0xff),
  	  .driver_info = RSVD(6) | ZLP },
@@ -28,6 +26,3 @@ index 45dcfaadaf98..386d62f74f1a 100644
  	{ USB_DEVICE_INTERFACE_CLASS(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_EM05CN_SG, 0xff),
  	  .driver_info = RSVD(6) | ZLP },
  	{ USB_DEVICE_INTERFACE_CLASS(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_EM05G, 0xff),
--- 
-2.48.1
-
