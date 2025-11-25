@@ -222,6 +222,13 @@ define U-Boot/rk3568/Default
   TPL:=$(RK3568_TPL)
 endef
 
+define U-Boot/9tripod-x3568-v4-rk3568
+  $(U-Boot/rk3568/Default)
+  NAME:=9Tripod X3568 v4
+  BUILD_DEVICES:= \
+    9tripod_x3568-v4
+endef
+
 define U-Boot/bpi-r2-pro-rk3568
   $(U-Boot/rk3568/Default)
   NAME:=Bananapi-R2 Pro
@@ -322,6 +329,12 @@ define U-Boot/sige3-rk3568
     armsom_sige3
 endef
 
+define U-Boot/xiguapi-v3-rk3568
+  $(U-Boot/rk3568/Default)
+  NAME:=XiGuaPi V3
+  BUILD_DEVICES:= \
+    nlnet_xiguapi-v3
+endef
 
 # RK3588 boards
 
@@ -420,6 +433,7 @@ UBOOT_TARGETS := \
   radxa-cm3-io-rk3566 \
   radxa-zero-3-rk3566 \
   rock-3c-rk3566 \
+  9tripod-x3568-v4-rk3568 \
   bpi-r2-pro-rk3568 \
   fastrhino-r66s-rk3568 \
   fastrhino-r68s-rk3568 \
@@ -429,6 +443,7 @@ UBOOT_TARGETS := \
   nanopi-r5c-rk3568 \
   nanopi-r5s-rk3568 \
   photonicat-rk3568 \
+  xiguapi-v3-rk3568 \
   radxa-e25-rk3568 \
   roc-pc-rk3568 \
   rock-3a-rk3568 \

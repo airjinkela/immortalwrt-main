@@ -1191,11 +1191,13 @@ define Device/elecom_wmc-x1800gst
   KERNEL_LOADADDR := 0x82000000
   KERNEL := kernel-bin | relocate-kernel $(loadaddr-y) | lzma | \
 	fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
+ifeq ($(IB),)
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
   ARTIFACTS := initramfs-factory.bin
   ARTIFACT/initramfs-factory.bin := append-image-stage initramfs-kernel.bin | \
 	check-size $$$$(KERNEL_SIZE) | elecom-wrc-gs-factory WMC-2LX 0.00 -N | \
 	append-string MT7621_ELECOM_WMC-2LX
+endif
 endif
   DEVICE_PACKAGES := kmod-mt7915-firmware -uboot-envtools
 endef
@@ -1325,11 +1327,13 @@ define Device/elecom_wrc-x1800gs
 	fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
   KERNEL_SIZE := 8192k
   IMAGE_SIZE := 51456k
+ifeq ($(IB),)
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
   ARTIFACTS := initramfs-factory.bin
   ARTIFACT/initramfs-factory.bin := append-image-stage initramfs-kernel.bin | \
 	znet-header 4.04(XVF.1)b90 COMC 0x68 | elecom-product-header WRC-X1800GS | \
 	check-size
+endif
 endif
   DEVICE_PACKAGES := kmod-mt7915-firmware
 endef
@@ -1343,11 +1347,13 @@ define Device/elecom_wsc-x1800gs
   KERNEL_LOADADDR := 0x82000000
   KERNEL := kernel-bin | relocate-kernel $(loadaddr-y) | lzma | \
 	fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
+ifeq ($(IB),)
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
   ARTIFACTS := initramfs-factory.bin
   ARTIFACT/initramfs-factory.bin := append-image-stage initramfs-kernel.bin | \
 	check-size $$$$(KERNEL_SIZE) | elecom-wrc-gs-factory WMC-2LX 0.00 -N | \
 	append-string MT7621_ELECOM_WMC-2LX
+endif
 endif
   DEVICE_PACKAGES := kmod-mt7915-firmware -uboot-envtools
 endef
@@ -1420,10 +1426,12 @@ define Device/genexis_pulse-ex400/common
     --log-lebs=2 --space-fixup --squash-uids
   KERNEL := kernel-bin | lzma | uImage lzma
   KERNEL_INITRAMFS := kernel-bin | append-dtb | lzma | uImage lzma
+ifeq ($(IB),)
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
   IMAGES += factory.bin
   IMAGE/factory.bin := append-image-stage initramfs-kernel.bin | \
 	inteno-bootfs | inteno-y3-header EX400 | append-md5sum-ascii-salted
+endif
 endif
   IMAGE/sysupgrade.bin := append-kernel | inteno-bootfs | pad-to 10M | \
     sysupgrade-tar kernel=$$$$@ | check-size | append-metadata
@@ -1517,10 +1525,12 @@ define Device/haier-sim_wr1800k
   KERNEL_LOADADDR := 0x82000000
   KERNEL := kernel-bin | relocate-kernel $(loadaddr-y) | lzma | \
 	fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
+ifeq ($(IB),)
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
   ARTIFACTS := initramfs-factory.bin
   ARTIFACT/initramfs-factory.bin := append-image-stage initramfs-kernel.bin | \
 	haier-sim_wr1800k-factory
+endif
 endif
   DEVICE_PACKAGES := kmod-mt7915-firmware
 endef
@@ -1592,9 +1602,11 @@ define Device/iodata_wn-ax1167gr
   IMAGE_SIZE := 15552k
   DEVICE_VENDOR := I-O DATA
   DEVICE_MODEL := WN-AX1167GR
-  # ARTIFACTS := initramfs-factory.bin
-  # ARTIFACT/initramfs-factory.bin := append-image-stage initramfs-kernel.bin | \
+  # ifeq ($(IB),)
+  #   ARTIFACTS := initramfs-factory.bin
+  #   ARTIFACT/initramfs-factory.bin := append-image-stage initramfs-kernel.bin | \
   # 	check-size 7680k | senao-header -r 0x30a -p 0x1055 -t 4
+  # endif
   DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 -uboot-envtools
 endef
 TARGET_DEVICES += iodata_wn-ax1167gr
@@ -1644,10 +1656,12 @@ define Device/iodata_wn-deax1800gr
   KERNEL := kernel-bin | relocate-kernel $(loadaddr-y) | lzma | \
 	fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+ifeq ($(IB),)
   ARTIFACTS := initramfs-factory.bin
   ARTIFACT/initramfs-factory.bin := append-image-stage initramfs-kernel.bin | \
 	check-size | xor-image -p 29944a25120984c2 -x | \
 	iodata-mstc-header2 WN-DEAX1800GR 00021003
+endif
   DEVICE_PACKAGES := kmod-mt7915-firmware
 endef
 TARGET_DEVICES += iodata_wn-deax1800gr
@@ -1775,9 +1789,11 @@ define Device/iptime_ax2004m
   KERNEL_LOADADDR := 0x82000000
   KERNEL := kernel-bin | relocate-kernel $(loadaddr-y) | lzma | \
 	fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
+ifeq ($(IB),)
   ARTIFACTS := initramfs-factory.bin
   ARTIFACT/initramfs-factory.bin := append-image-stage initramfs-kernel.bin | \
 	check-size | iptime-crc32 ax2004m
+endif
   DEVICE_VENDOR := ipTIME
   DEVICE_MODEL := AX2004M
   DEVICE_PACKAGES := kmod-mt7915-firmware kmod-usb3
@@ -1852,7 +1868,7 @@ define Device/jdcloud_re-sp-01b
   DEVICE_VENDOR := JDCloud
   DEVICE_MODEL := RE-SP-01B
   DEVICE_PACKAGES := kmod-mt7603 kmod-mt7615e kmod-mt7615-firmware \
-	kmod-sdhci-mt7620 kmod-usb3 automount
+	kmod-mmc-mtk kmod-usb3 automount
 endef
 TARGET_DEVICES += jdcloud_re-sp-01b
 

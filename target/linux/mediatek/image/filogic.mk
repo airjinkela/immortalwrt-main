@@ -271,6 +271,11 @@ define Device/asus_rt-ax52
   KERNEL_INITRAMFS := kernel-bin | lzma | \
 	fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb with-initrd | pad-to 64k
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+ifeq ($(IB),)
+  ARTIFACTS := initramfs.trx
+  ARTIFACT/initramfs.trx := append-image-stage initramfs-kernel.bin | \
+	uImage none | asus-trx -v 3 -n $$(DEVICE_MODEL)
+endif
 endef
 TARGET_DEVICES += asus_rt-ax52
 
@@ -923,12 +928,14 @@ define Device/dlink_aquila-pro-ai-m30-a1
   DEVICE_DTS_DIR := ../dts
   DEVICE_PACKAGES := kmod-leds-gca230718 kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware
   KERNEL_IN_UBI := 1
-  IMAGES += recovery.bin
   IMAGE_SIZE := 51200k
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+ifeq ($(IB),)
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
+  IMAGES += recovery.bin
   IMAGE/recovery.bin := append-image-stage initramfs-kernel.bin | sysupgrade-tar kernel=$$$$@ |\
     pad-to $$(IMAGE_SIZE) | dlink-ai-recovery-header DLK6E6110001 \x6A\x28\xEE\x0B \x00\x00\x2C\x00 \x00\x00\x20\x03 \x61\x6E
+endif
 endif
 endef
 TARGET_DEVICES += dlink_aquila-pro-ai-m30-a1
@@ -940,12 +947,14 @@ define Device/dlink_aquila-pro-ai-m60-a1
   DEVICE_DTS := mt7986a-dlink-aquila-pro-ai-m60-a1
   DEVICE_DTS_DIR := ../dts
   DEVICE_PACKAGES := kmod-leds-gca230718 kmod-mt7915e kmod-mt7986-firmware mt7986-wo-firmware
-  IMAGES += recovery.bin
   IMAGE_SIZE := 51200k
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+ifeq ($(IB),)
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
+  IMAGES += recovery.bin
   IMAGE/recovery.bin := append-image-stage initramfs-kernel.bin | sysupgrade-tar kernel=$$$$@ |\
     pad-to $$(IMAGE_SIZE) | dlink-ai-recovery-header DLK6E8202001 \x30\x6C\x19\x0C \x00\x00\x2C\x00 \x00\x00\x20\x03 \x82\x6E
+endif
 endif
 endef
 TARGET_DEVICES += dlink_aquila-pro-ai-m60-a1
@@ -1334,11 +1343,11 @@ define Device/konka_komi-a31
   UBOOTENV_IN_UBI := 1
   IMAGES := sysupgrade.itb
   KERNEL_INITRAMFS_SUFFIX := -recovery.itb
-  KERNEL := kernel-bin | gzip
+  KERNEL := kernel-bin | lzma
   KERNEL_INITRAMFS := kernel-bin | lzma | \
         fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb with-initrd | pad-to 64k
   IMAGE/sysupgrade.itb := append-kernel | \
-        fit gzip $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb external-static-with-rootfs | append-metadata
+        fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb external-static-with-rootfs | append-metadata
   ARTIFACTS := preloader.bin bl31-uboot.fip \
 	emmc-gpt.bin emmc-preloader.bin emmc-bl31-uboot.fip \
 	nor-preloader.bin nor-bl31-uboot.fip
@@ -2103,9 +2112,11 @@ define Device/xiaomi_mi-router-ax3000t
   BLOCKSIZE := 128k
   PAGESIZE := 2048
   DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware
+ifeq ($(IB),)
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
   ARTIFACTS := initramfs-factory.ubi
   ARTIFACT/initramfs-factory.ubi := append-image-stage initramfs-kernel.bin | ubinize-kernel
+endif
 endif
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
@@ -2133,9 +2144,11 @@ define Device/xiaomi_mi-router-ax3000t-ubootmod
   ARTIFACTS := preloader.bin bl31-uboot.fip
   ARTIFACT/preloader.bin := mt7981-bl2 spim-nand-ddr3
   ARTIFACT/bl31-uboot.fip := mt7981-bl31-uboot xiaomi_mi-router-ax3000t
+ifeq ($(IB),)
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
   ARTIFACTS += initramfs-factory.ubi
   ARTIFACT/initramfs-factory.ubi := append-image-stage initramfs-recovery.itb | ubinize-kernel
+endif
 endif
 endef
 TARGET_DEVICES += xiaomi_mi-router-ax3000t-ubootmod
@@ -2150,9 +2163,11 @@ define Device/xiaomi_mi-router-wr30u-stock
   BLOCKSIZE := 128k
   PAGESIZE := 2048
   DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware
+ifeq ($(IB),)
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
   ARTIFACTS := initramfs-factory.ubi
   ARTIFACT/initramfs-factory.ubi := append-image-stage initramfs-kernel.bin | ubinize-kernel
+endif
 endif
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
@@ -2180,9 +2195,11 @@ define Device/xiaomi_mi-router-wr30u-ubootmod
   ARTIFACTS := preloader.bin bl31-uboot.fip
   ARTIFACT/preloader.bin := mt7981-bl2 spim-nand-ddr3
   ARTIFACT/bl31-uboot.fip := mt7981-bl31-uboot xiaomi_mi-router-wr30u
+ifeq ($(IB),)
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
   ARTIFACTS += initramfs-factory.ubi
   ARTIFACT/initramfs-factory.ubi := append-image-stage initramfs-recovery.itb | ubinize-kernel
+endif
 endif
 endef
 TARGET_DEVICES += xiaomi_mi-router-wr30u-ubootmod
@@ -2197,9 +2214,11 @@ define Device/xiaomi_redmi-router-ax6000-stock
   UBINIZE_OPTS := -E 5
   BLOCKSIZE := 128k
   PAGESIZE := 2048
+ifeq ($(IB),)
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
   ARTIFACTS := initramfs-factory.ubi
   ARTIFACT/initramfs-factory.ubi := append-image-stage initramfs-kernel.bin | ubinize-kernel
+endif
 endif
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
@@ -2227,9 +2246,11 @@ define Device/xiaomi_redmi-router-ax6000-ubootmod
   ARTIFACTS := preloader.bin bl31-uboot.fip
   ARTIFACT/preloader.bin := mt7986-bl2 spim-nand-ddr4
   ARTIFACT/bl31-uboot.fip := mt7986-bl31-uboot xiaomi_redmi-router-ax6000
+ifeq ($(IB),)
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
   ARTIFACTS += initramfs-factory.ubi
   ARTIFACT/initramfs-factory.ubi := append-image-stage initramfs-recovery.itb | ubinize-kernel
+endif
 endif
 endef
 TARGET_DEVICES += xiaomi_redmi-router-ax6000-ubootmod
@@ -2357,9 +2378,11 @@ define Device/zyxel_ex5601-t0-ubootmod
   ARTIFACTS := preloader.bin bl31-uboot.fip
   ARTIFACT/preloader.bin := mt7986-bl2 spim-nand-4k-ddr4
   ARTIFACT/bl31-uboot.fip := mt7986-bl31-uboot zyxel_ex5601-t0
+ifeq ($(IB),)
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
   ARTIFACTS += initramfs-factory.ubi
   ARTIFACT/initramfs-factory.ubi := append-image-stage initramfs-recovery.itb | ubinize-kernel
+endif
 endif
 endef
 TARGET_DEVICES += zyxel_ex5601-t0-ubootmod
