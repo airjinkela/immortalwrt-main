@@ -2485,7 +2485,7 @@ define Device/cmcc_rax3000m-nand
 endef
 TARGET_DEVICES += cmcc_rax3000m-nand
 
-define Device/cmcc_xr30-nand
+define Device/cmcc_xr30-nand-mod
   DEVICE_VENDOR := CMCC
   DEVICE_MODEL := XR30 NAND
   DEVICE_VARIANT := (U-Boot mod)
@@ -2502,9 +2502,9 @@ define Device/cmcc_xr30-nand
   IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-TARGET_DEVICES += cmcc_xr30-nand
+TARGET_DEVICES += cmcc_xr30-nand-mod
 
-define Device/cmcc_xr30-emmc
+define Device/cmcc_xr30-emmc-mod
   DEVICE_VENDOR := CMCC
   DEVICE_MODEL := XR30 EMMC
   DEVICE_VARIANT := (U-Boot mod)
@@ -2514,7 +2514,7 @@ define Device/cmcc_xr30-emmc
 	automount f2fsck mkf2fs lsblk cfdisk
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-TARGET_DEVICES += cmcc_xr30-emmc
+TARGET_DEVICES += cmcc_xr30-emmc-mod
 
 define Device/xiaomi_mi-router-ax3000t-mod
   DEVICE_VENDOR := Xiaomi
