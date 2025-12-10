@@ -13,6 +13,7 @@ mediatek_setup_interfaces()
 	cmcc,xr30-emmc|\
 	cmcc,rax3000m*|\
 	cmcc,rax3000me|\
+	cmcc,rax3000z-emmc|\
 	h3c,magic-nx30-pro|\
 	h3c,magic-nx30-pro-nmbm|\
 	imou,lc-hx3001|\
