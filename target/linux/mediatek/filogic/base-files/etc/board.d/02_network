@@ -111,6 +111,9 @@ mediatek_setup_interfaces()
 		ucidef_add_switch "switch0" \
 					"0@eth2" "1:wan" "2:lan" "3:lan" "4:lan"
 		;;
+	ruijie,rg-be68-ultra-dsa-mod)
+		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3" wan
+		;;
 	cudy,ap3000outdoor-v1|\
 	cudy,ap3000-v1|\
 	cudy,re3000-v1|\
@@ -129,6 +132,9 @@ mediatek_setup_interfaces()
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4 eth2.2 eth1" eth2.1
 		ucidef_add_switch "switch0" \
 					"0@eth2" "1:wan" "2:lan" "3:lan" "4:lan"
+		;;
+	ruijie,rg-be72-pro-dsa-mod)
+		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4 lan5 lan6 lan7 lan8" wan
 		;;
 	cudy,m3000-v1|\
 	cudy,tr3000-256mb-v1|\

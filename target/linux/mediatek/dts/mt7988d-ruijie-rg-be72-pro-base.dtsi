@@ -9,7 +9,6 @@
 
 
 / {
-	model = "Ruijie BE72 PRO";
 	compatible = "mediatek,mt7988d";
 
 	aliases {
