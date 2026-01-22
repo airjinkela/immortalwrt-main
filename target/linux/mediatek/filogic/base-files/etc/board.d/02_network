@@ -62,6 +62,7 @@ mediatek_setup_interfaces()
 		;;
 	asus,tuf-ax4200|\
 	iptime,ax3000sm|\
+	iptime,ax7800m-6e|\
 	jdcloud,re-cp-03|\
 	mediatek,mt7981-rfb|\
 	netcore,n60|\
@@ -70,6 +71,7 @@ mediatek_setup_interfaces()
 	ruijie,rg-x60-pro|\
 	ruijie,rg-x60-pro-mod|\
 	unielec,u7981-01*|\
+	wavlink,wl-wn536ax6-a|\
 	zbtlink,zbt-z8102ax|\
 	zbtlink,zbt-z8102ax-v2|\
 	zyxel,ex5601-t0-stock|\
@@ -79,6 +81,7 @@ mediatek_setup_interfaces()
 	clx,s20p)
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4 lan5 lan6" eth1
 		;;
+	asus,tuf-ax4200q|\
 	asus,tuf-ax6000|\
 	glinet,gl-mt6000|\
 	tplink,tl-xdr4288|\
