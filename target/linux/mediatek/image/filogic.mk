@@ -2820,6 +2820,16 @@ define Device/zhao_7981r128-mod
 endef
 TARGET_DEVICES += zhao_7981r128-mod
 
+define Device/imilab_z8003ax
+  DEVICE_VENDOR := Imilab
+  DEVICE_MODEL := Z8003AX
+  DEVICE_DTS := mt7981b-imilab-z8003ax
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += imilab_z8003ax
+
 define Device/ruijie_rg-be68-ultra
   DEVICE_VENDOR := Ruijie
   DEVICE_MODEL := RG-BE68 Ultra

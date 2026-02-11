@@ -16,6 +16,7 @@ mediatek_setup_interfaces()
 	cmcc,rax3000z-emmc|\
 	h3c,magic-nx30-pro|\
 	h3c,magic-nx30-pro-nmbm|\
+	imilab,z8003ax|\
 	imou,lc-hx3001|\
 	konka,komi-a31|\
 	netis,nx31|\
