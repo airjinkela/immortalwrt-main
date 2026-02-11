@@ -2825,7 +2825,7 @@ define Device/imilab_z8003ax
   DEVICE_MODEL := Z8003AX
   DEVICE_DTS := mt7981b-imilab-z8003ax
   DEVICE_DTS_DIR := ../dts
-  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware
+  DEVICE_PACKAGES := kmod-usb3 kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware automount
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += imilab_z8003ax

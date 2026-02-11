@@ -272,3 +272,11 @@
 	nvmem-cells = <&eeprom_factory>;
 	nvmem-cell-names = "eeprom";
 };
+
+&xhci {
+	status = "okay";
+};
+
+&usb_phy {
+	status = "okay";
+};
