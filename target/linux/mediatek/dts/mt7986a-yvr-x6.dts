@@ -4,6 +4,8 @@
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/pinctrl/mt65xx.h>
+#include <dt-bindings/leds/common.h>
+#include <dt-bindings/leds/leds-pca955x.h>
 
 #include "mt7986a.dtsi"
 
@@ -294,6 +296,37 @@
 		compatible = "wlf,wm8960";
 		reg = <0x1a>;
 		wlf,shared-lrclk;
+	};
+
+	pca9633: led-controller@62 {
+		compatible = "nxp,pca9633";
+		//nxp,hw-blink;
+		nxp,totem-pole;
+		nxp,inverted-out;
+		reg = <0x62>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		led_rgb_red: red@0 {
+			label = "red";
+			color = <LED_COLOR_ID_RED>;
+			function = LED_FUNCTION_INDICATOR;
+			reg = <0>;
+		};
+
+		led_rgb_green: green@1 {
+			label = "green";
+			color = <LED_COLOR_ID_GREEN>;
+			function = LED_FUNCTION_INDICATOR;
+			reg = <1>;
+		};
+
+		led_rgb_blue: blue@2 {
+			label = "blue";
+			color = <LED_COLOR_ID_BLUE>;
+			function = LED_FUNCTION_INDICATOR;
+			reg = <2>;
+		};
 	};
 };
 

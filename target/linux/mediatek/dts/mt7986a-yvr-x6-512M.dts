@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+
+/dts-v1/;
+#include "mt7986a-yvr-x6.dts"
+/ {
+	model = "YVR X6 512M";
+};
+&spi0 {
+	flash@0 {
+		partitions {
+			partition@580000 {
+				label = "ubi";
+				reg = <0x580000 0x1DA00000>;
+			};
+		};
+	};
+};
