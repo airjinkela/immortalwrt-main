@@ -91,6 +91,11 @@ mediatek_setup_interfaces()
 	tplink,tl-xtr8488)
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4 lan5" eth1
 		;;
+	tplink,tl-7dr7299-v1)
+		ucidef_add_switch "switch0" \
+			"1:lan:3" "2:lan:4" "3:lan:5" "4:lan:6" "5:lan:7"  "0t@eth2"
+		ucidef_set_interfaces_lan_wan "lan1 lan2 eth2.1" "eth1"
+		;;
 	bananapi,bpi-r3)
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4 sfp2" "eth1 wan"
 		;;
