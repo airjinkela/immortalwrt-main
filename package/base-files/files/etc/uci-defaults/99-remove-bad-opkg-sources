@@ -1,0 +1,5 @@
+sed -ie '/immortalwrt_third/d' /etc/opkg/distfeeds.conf 
+sed -ie '/third\/packages.adb/d' /etc/apk/repositories.d/distfeeds.list
+sed -ie '/video\/packages.adb/d' /etc/apk/repositories.d/distfeeds.list
+
+exit 0
