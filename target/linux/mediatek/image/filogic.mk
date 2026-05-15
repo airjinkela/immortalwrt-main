@@ -3633,3 +3633,25 @@ ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
 endif
 endef
 TARGET_DEVICES += zyxel_wx5600-t0-ubootmod
+
+define Device/hiveton_h87pro-evb-nand
+  DEVICE_VENDOR := Hiveton
+  DEVICE_MODEL := h87pro EVB board(nand)
+  DEVICE_DTS := mt7987a-hiveton-h87pro-evb-nand
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := mt7987-2p5g-phy-firmware kmod-sfp kmod-usb3 kmod-rtl837x_gsw kmod-i2c-gpio \
+   swconfig blkid automount
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += hiveton_h87pro-evb-nand
+
+define Device/hiveton_h87pro-evb-emmc
+  DEVICE_VENDOR := Hiveton
+  DEVICE_MODEL := h87pro EVB board(emmc)
+  DEVICE_DTS := mt7987a-hiveton-h87pro-evb-emmc
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := mt7987-2p5g-phy-firmware kmod-sfp kmod-usb3 kmod-rtl837x_gsw kmod-i2c-gpio \
+   swconfig blkid automount e2fsprogs f2fsck mkf2fs
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += hiveton_h87pro-evb-emmc

@@ -224,6 +224,13 @@ mediatek_setup_interfaces()
 	zyxel,wx5600-t0-ubootmod)
 		ucidef_set_interface_lan "lan1 lan2"
 		;;
+	hiveton,h87pro-evb*)
+		# ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4 lan5" eth1
+
+		ucidef_set_interfaces_lan_wan "eth0.1" eth1
+		ucidef_add_switch "switch0" \
+					"0@eth0" "1:lan" "2:lan" "3:lan" "4:lan" "5:lan"
+		;;
 	*)
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4" wan
 		;;
