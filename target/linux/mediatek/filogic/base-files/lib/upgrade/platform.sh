@@ -142,6 +142,8 @@ platform_do_upgrade() {
 	glinet,gl-mt6000|\
 	glinet,gl-x3000|\
 	glinet,gl-xe3000|\
+	hiveton,h87pro|\
+	hiveton,h87pro-dsa|\
 	hiveton,h87pro-evb-emmc|\
 	huasifei,wh3000-emmc|\
 	huasifei,wh3000-pro-emmc|\
@@ -332,6 +334,8 @@ platform_check_image() {
 		return $?
 		;;
 	creatlentem,clt-r30b1|\
+	hiveton,h87pro|\
+	hiveton,h87pro-dsa|\
 	hiveton,h87pro-evb-emmc|\
 	creatlentem,clt-r30b1-112m|\
 	nradio,c8-668gl)
@@ -366,6 +370,8 @@ platform_copy_config() {
 	glinet,gl-mt6000|\
 	glinet,gl-x3000|\
 	glinet,gl-xe3000|\
+	hiveton,h87pro|\
+	hiveton,h87pro-dsa|\
 	hiveton,h87pro-evb-emmc|\
 	huasifei,wh3000-emmc|\
 	huasifei,wh3000-pro-emmc|\
