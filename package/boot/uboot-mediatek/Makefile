@@ -347,8 +347,8 @@ define U-Boot/mt7981_comfast_cf-wr632ax
   UBOOT_IMAGE:=u-boot.fip
   BL2_BOOTDEV:=spim-nand
   BL2_SOC:=mt7981
-  BL2_DDRTYPE:=ddr3
-  DEPENDS:=+trusted-firmware-a-mt7981-spim-nand-ddr3
+  BL2_DDRTYPE:=ddr3-1866mhz
+  DEPENDS:=+trusted-firmware-a-mt7981-spim-nand-ddr3-1866mhz
 endef
 
 define U-Boot/mt7981_cudy_tr3000-v1
@@ -371,6 +371,54 @@ define U-Boot/mt7981_cudy_wbr3000uax-v1
   BL2_BOOTDEV:=cudy-ddr3
   BL2_SOC:=mt7981
   DEPENDS:=+trusted-firmware-a-mt7981-cudy-ddr3
+endef
+
+define U-Boot/mt7981_cudy_wr3000e-v1
+  NAME:=Cudy WR3000E v1
+  BUILD_SUBTARGET:=filogic
+  BUILD_DEVICES:=cudy_wr3000e-v1-ubootmod
+  UBOOT_CONFIG:=mt7981_cudy_wr3000e-v1
+  UBOOT_IMAGE:=u-boot.fip
+  BL2_BOOTDEV:=cudy
+  BL2_SOC:=mt7981
+  BL2_DDRTYPE:=ddr3
+  DEPENDS:=+trusted-firmware-a-mt7981-cudy-ddr3
+endef
+
+define U-Boot/mt7981_cudy_wr3000s-v1
+  NAME:=Cudy WR3000S v1
+  BUILD_SUBTARGET:=filogic
+  BUILD_DEVICES:=cudy_wr3000s-v1-ubootmod
+  UBOOT_CONFIG:=mt7981_cudy_wr3000s-v1
+  UBOOT_IMAGE:=u-boot.fip
+  BL2_BOOTDEV:=cudy
+  BL2_SOC:=mt7981
+  BL2_DDRTYPE:=ddr3
+  DEPENDS:=+trusted-firmware-a-mt7981-cudy-ddr3
+endef
+
+define U-Boot/mt7981_cudy_wr3000h-v1
+  NAME:=Cudy WR3000H v1
+  BUILD_SUBTARGET:=filogic
+  BUILD_DEVICES:=cudy_wr3000h-v1-ubootmod
+  UBOOT_CONFIG:=mt7981_cudy_wr3000h-v1
+  UBOOT_IMAGE:=u-boot.fip
+  BL2_BOOTDEV:=cudy
+  BL2_SOC:=mt7981
+  BL2_DDRTYPE:=ddr3
+  DEPENDS:=+trusted-firmware-a-mt7981-cudy-ddr3
+endef
+
+define U-Boot/mt7981_cudy_wr3000p-v1
+  NAME:=Cudy WR3000P v1
+  BUILD_SUBTARGET:=filogic
+  BUILD_DEVICES:=cudy_wr3000p-v1-ubootmod
+  UBOOT_CONFIG:=mt7981_cudy_wr3000p-v1
+  UBOOT_IMAGE:=u-boot.fip
+  BL2_BOOTDEV:=cudy
+  BL2_SOC:=mt7981
+  BL2_DDRTYPE:=ddr4
+  DEPENDS:=+trusted-firmware-a-mt7981-cudy-ddr4
 endef
 
 define U-Boot/mt7981_glinet_gl-mt2500
@@ -1263,6 +1311,10 @@ UBOOT_TARGETS := \
 	mt7981_comfast_cf-wr632ax \
 	mt7981_cudy_tr3000-v1 \
 	mt7981_cudy_wbr3000uax-v1 \
+	mt7981_cudy_wr3000e-v1 \
+	mt7981_cudy_wr3000s-v1 \
+	mt7981_cudy_wr3000h-v1 \
+	mt7981_cudy_wr3000p-v1 \
 	mt7981_gatonetworks_gdsp \
 	mt7981_glinet_gl-mt2500 \
 	mt7981_glinet_gl-x3000 \

@@ -2308,6 +2308,7 @@ endef
 
 $(eval $(call KernelPackage,mhi-wwan-mbim))
 
+
 define KernelPackage/mtk-t7xx
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=MediaTek T7xx 5G modem
@@ -2325,6 +2326,7 @@ define KernelPackage/mtk-t7xx/description
 endef
 
 $(eval $(call KernelPackage,mtk-t7xx))
+
 
 define KernelPackage/atlantic
   SUBMENU:=$(NETWORK_DEVICES_MENU)
