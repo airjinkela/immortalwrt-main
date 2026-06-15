@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: (GPL-2.0 OR MIT)
 
 /dts-v1/;
-#include "mt7987a.dtsi"
-#include <dt-bindings/input/input.h>
+#include "mt7987a-hiveton-h87pro.dts"
 
 / {
 	model = "Hiveton h87pro (DSA)";
@@ -10,7 +9,7 @@
 };
 
 &mdio {
-	/delete-node/ rtl837x-gsw@1d;
+	/delete-node/ rtl837x-gsw@1;
 
 	rtk_gpio: rtl837x-gsw@1 {
 		compatible = "realtek,rtl8372n";
