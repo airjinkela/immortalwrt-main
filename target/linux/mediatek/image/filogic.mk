@@ -4083,3 +4083,39 @@ ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
 endif
 endef
 TARGET_DEVICES += zyxel_wx5600-t0-ubootmod
+
+define Device/tplink_tl-7dr7299-v1-dsa
+  DEVICE_VENDOR := TP-Link
+  DEVICE_MODEL := TL-7DR7299
+  DEVICE_VARIANT := v1 (DSA)
+  DEVICE_DTS := mt7988a-tplink-tl-7dr7299-v1-dsa
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_DTS_LOADADDR := 0x47f00000
+  DEVICE_PACKAGES := kmod-mt7992-firmware mt7988-wo-firmware \
+	 kmod-rtl8261d kmod-i2c-gpio kmod-sfp kmod-usb3 automount
+  KERNEL_LOADADDR := 0x48000000
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  KERNEL_IN_UBI := 1
+  UBOOTENV_IN_UBI := 1
+  IMAGES := sysupgrade.itb
+  KERNEL_INITRAMFS_SUFFIX := -recovery.itb
+  KERNEL := kernel-bin | gzip
+  KERNEL_INITRAMFS := kernel-bin | lzma | \
+	fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb with-initrd | pad-to 64k
+  IMAGE/sysupgrade.itb := append-kernel | \
+	fit gzip $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb external-with-rootfs | append-metadata
+endef
+TARGET_DEVICES += tplink_tl-7dr7299-v1-dsa
+
+define Device/hiveton_h87pro-dsa
+  DEVICE_VENDOR := Hiveton
+  DEVICE_MODEL := h87pro (DSA)
+  DEVICE_DTS := mt7987a-hiveton-h87pro-dsa
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := mt7987-2p5g-phy-firmware kmod-sfp kmod-usb3 kmod-rtl8372n-dsa kmod-i2c-gpio kmod-mt7992-23-firmware \
+   blkid automount e2fsprogs f2fsck mkf2fs
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += hiveton_h87pro-dsa

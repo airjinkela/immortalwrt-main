@@ -185,6 +185,7 @@ platform_do_upgrade() {
 	tplink,tl-7dr7230-v1|\
 	tplink,tl-7dr7230-v2|\
 	tplink,tl-7dr7250-v1|\
+	tplink,tl-7dr7299-v1-dsa|\
 	tplink,tl-xdr4288|\
 	tplink,tl-xdr6086|\
 	tplink,tl-xdr6088|\
@@ -208,6 +209,7 @@ platform_do_upgrade() {
 	glinet,gl-x3000|\
 	glinet,gl-xe3000|\
 	hiveton,h5000m|\
+	hiveton,h87pro-dsa|\
 	huasifei,wh3000-emmc|\
 	huasifei,wh3000-pro-emmc|\
 	smartrg,sdg-8612|\
@@ -418,6 +420,7 @@ platform_check_image() {
 		;;
 	creatlentem,clt-r30b1|\
 	creatlentem,clt-r30b1-112m|\
+	hiveton,h87pro-dsa|\
 	hiveton,h5000m|\
 	nradio,c8-668gl)
 		# tar magic `ustar`
@@ -452,6 +455,7 @@ platform_copy_config() {
 	glinet,gl-x3000|\
 	glinet,gl-xe3000|\
 	globitel,bt-r320|\
+	hiveton,h87pro-dsa|\
 	hiveton,h5000m|\
 	huasifei,wh3000-emmc|\
 	huasifei,wh3000-pro-emmc|\
